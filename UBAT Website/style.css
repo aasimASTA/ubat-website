@@ -13,6 +13,17 @@ body {
   color: rgb(248, 242, 242);
 }
 
+
+  .navbar-brand img {
+    height: 45px; /* Reduce slightly if needed */
+   
+
+ /* Ensures aspect ratio is maintained */
+    max-width: 150px; /* Prevents the image from being too large */
+}
+
+
+
 .navbar-nav .nav-link {
   color: #333;
   font-weight:550;
@@ -29,16 +40,17 @@ body {
 
 /* Custom Multi-Column Dropdown */
 .custom-dropdown {
-  min-width: 470px;
-  background-color:white;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 100%;
-  z-index: 1000;
-
+  /* Subtract navbar padding to fit inside */
+ background-color:rgb(253, 250, 243);
+ border-radius: 8px;
+ border: 1px solid #ddd;
+ display: none;
+ position: absolute;
+ left: 0;
+ right: 0;
+ margin: auto;
+ z-index: 1000;
+ max-width: 1150px; /* Set a max-width for large screens */
 }
 
 /* Show dropdown on hover */

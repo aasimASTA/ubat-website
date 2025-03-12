@@ -45,9 +45,9 @@
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand" href="#">
-                <img src="./images/UBAT logo.png" alt="UBAT" height="60">
+                <img src="./images/UBATLogo.jpg" alt="UBAT" height="60">
             </a>
-            
+
             <!-- Mobile Toggle Button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -57,9 +57,9 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                    
+
                     <!-- Khutba Dropdown -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item ">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Khutba</a>
                         <div class="dropdown-menu custom-dropdown p-3">
                             <div class="row">
@@ -79,13 +79,13 @@
                                     <a href="#">Public Lecture</a>
                                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </li>
 
                     <!-- Kithab Dropdown with Multi-Column -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item ">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Kithab</a>
                         <div class="dropdown-menu custom-dropdown p-3">
                             <div class="row">
@@ -98,22 +98,22 @@
                                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <a  href="#">Fiqh</a>
+                                    <a href="#">Fiqh</a>
                                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <a  href="#">Hadith</a>
+                                    <a href="#">Hadith</a>
                                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <a  href="#">Tafseer</a>
+                                    <a href="#">Tafseer</a>
                                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
                                 </div>
                             </div>
                         </div>
                     </li>
                     <!-- Ibadah Dropdown with Multi-Column -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item ">
                         <a class="nav-link dropdown-toggle" href="#" id="ibadahDropdown" role="button"
                             data-bs-toggle="dropdown">
                             Ibadah
@@ -149,7 +149,7 @@
                     </li>
 
                     <!-- Purification Dropdown with Multi-Column -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item ">
                         <a class="nav-link dropdown-toggle" href="#" id="purificationDropdown" role="button"
                             data-bs-toggle="dropdown">
                             Purification
@@ -172,13 +172,13 @@
                                     <a href="#">Istigfhar</a>
                                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </li>
 
                     <!-- Family and Soceity Dropdown with Multi-Column -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item ">
                         <a class="nav-link dropdown-toggle" href="#" id="familyDropdown" role="button"
                             data-bs-toggle="dropdown">
                             Family & Society
@@ -214,7 +214,7 @@
                     </li>
 
                     <!-- Biography Dropdown with Multi-Column -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item ">
                         <a class="nav-link dropdown-toggle" href="#" id="biographyDropdown" role="button"
                             data-bs-toggle="dropdown">
                             Biography
@@ -233,19 +233,20 @@
                                     <a href="#">Ulama</a>
                                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
                                 </div>
-                               
-                               
+
+
                             </div>
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="aboutus.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact</a></li>
-                    <li class="nav-item ms-3 mt-1"> <a class="btn btn-primary donate-btn" href="donationpage.html">Donate</a></li>
+                    <li class="nav-item ms-3 mt-1"> <a class="btn btn-primary donate-btn"
+                            href="donationpage.html">Donate</a></li>
                 </ul>
             </div>
 
-            
-           
+
+
         </div>
     </nav>
 
@@ -300,7 +301,7 @@
 
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
 
 
@@ -310,45 +311,45 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-    // Selecting the amount buttons and input field
-    const amountButtons = document.querySelectorAll(".amount-btn");
-    const amountInput = document.getElementById("amount-input");
+            // Selecting the amount buttons and input field
+            const amountButtons = document.querySelectorAll(".amount-btn");
+            const amountInput = document.getElementById("amount-input");
 
-    // Add click event listener to each amount button
-    amountButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            amountInput.value = this.getAttribute("data-amount");
+            // Add click event listener to each amount button
+            amountButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    amountInput.value = this.getAttribute("data-amount");
+                });
+            });
         });
-    });
-});
 
-function donate() {
-    // Selecting input fields
-    let amountInput = document.getElementById("amount-input");
-    let firstName = document.getElementById("firstname");
-    let lastName = document.getElementById("lastname");
-    let emailAddress = document.getElementById("emailaddress");
-    let phoneInput = document.getElementById("phone");
+        function donate() {
+            // Selecting input fields
+            let amountInput = document.getElementById("amount-input");
+            let firstName = document.getElementById("firstname");
+            let lastName = document.getElementById("lastname");
+            let emailAddress = document.getElementById("emailaddress");
+            let phoneInput = document.getElementById("phone");
 
-    // Check if required fields are filled
-    if (amountInput.value === "" || firstName.value === "" || lastName.value === "" || emailAddress.value === "") {
-        alert("Please fill in all required fields.");
-        return;
-    }
+            // Check if required fields are filled
+            if (amountInput.value === "" || firstName.value === "" || lastName.value === "" || emailAddress.value === "") {
+                alert("Please fill in all required fields.");
+                return;
+            }
 
-    // Show success message
-    alert("Your Donation is Successful");
+            // Show success message
+            alert("Your Donation is Successful");
 
-    // Clear all input fields after clicking OK
-    amountInput.value = "";
-    firstName.value = "";
-    lastName.value = "";
-    emailAddress.value = "";
-    phoneInput.value = "";
+            // Clear all input fields after clicking OK
+            amountInput.value = "";
+            firstName.value = "";
+            lastName.value = "";
+            emailAddress.value = "";
+            phoneInput.value = "";
 
-    // Reset dropdown selection
-   
-}
+            // Reset dropdown selection
+
+        }
 
 
     </script>

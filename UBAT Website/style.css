@@ -793,7 +793,8 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #2c3e50;
 }
 .card {
-  margin-bottom: 20px; /* Adds spacing between cards */
+  margin-bottom: 20px;
+  height: 400px; /* Adds spacing between cards */
 }
 
 .card-img-top {

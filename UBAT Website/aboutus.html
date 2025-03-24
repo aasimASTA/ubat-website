@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications|Uthman Ibn Affan Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark top-nav">
+        <div class="container-fluid top-navbar d-flex flex-wrap align-items-center justify-content-between py-2">
+
+            <!-- Language Selection -->
+            <div class="d-flex">
+                <a href="#" class="text-white mx-2">English</a>
+                <a href="#" class="text-white mx-2">தமிழ்</a>
+            </div>
+
+            <!-- Contact & Social Links -->
+            <div class="d-flex align-items-center flex-wrap">
+                <a href="#" class="text-white me-2"><i class="bi bi-telephone"></i> +9472 2251277</a>
+                <span class="text-white mx-1 d-none d-md-inline">|</span>
+                <a href="#" class="text-white me-2">✉ cist@ahlulhadith.in</a>
+
+                <!-- Social Icons -->
+                <div class="d-flex mt-2 mt-md-0">
+                    <a href="#" class="text-white mx-2"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top main-navbar" id="navbar">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="./images/UBATLogo.jpg" alt="UBAT" height="60">
+            </a>
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+
+                    <!-- Khutba Dropdown -->
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Khutba</a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="jumuah.html">Jumuah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Nikkah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Funeral</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Public Lecture</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Kithab Dropdown with Multi-Column -->
+                    <li class="nav-item ">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Kithab</a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Aqeedah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Manhaj</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Fiqh</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Hadith</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Tafseer</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Ibadah Dropdown with Multi-Column -->
+                    <li class="nav-item ">
+                        <a class="nav-link dropdown-toggle" href="#" id="ibadahDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Ibadah
+                        </a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Prayer</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Zakat</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Hajj</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Umrah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Fasting</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Dhikr</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Purification Dropdown with Multi-Column -->
+                    <li class="nav-item ">
+                        <a class="nav-link dropdown-toggle" href="#" id="purificationDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Purification
+                        </a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Heart</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Taubah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Taqwah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Istigfhar</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Family and Soceity Dropdown with Multi-Column -->
+                    <li class="nav-item ">
+                        <a class="nav-link dropdown-toggle" href="#" id="familyDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Family & Society
+                        </a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Men</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Women</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Children</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Family</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Soceity</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Political Talk</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Biography Dropdown with Multi-Column -->
+                    <li class="nav-item ">
+                        <a class="nav-link dropdown-toggle" href="#" id="biographyDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Biography
+                        </a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Prophet</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Sahabha</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Ulama</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="aboutus.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact</a></li>
+                    <li class="nav-item ms-3 mt-1"> <a class="btn btn-primary donate-btn"
+                            href="donationpage.html">Donate</a></li>
+                </ul>
+            </div>
+
+
+
+        </div>
+    </nav>
+
+
+    <div class="container-fluid aboutus mt-5">
+        <h1>ABOUT</h1>
+        <div class="container mt-4 aboutcontent1">
+            <p class="text-center">بــــــــــــــــســـــم الله الرحـــــــمــــن الرحـــــــــيــم</p>
+            <p class="text-center">الحمد لله رب العالمين والصلاة والسلام على من لا نبي بعده اما بعد</p>
+
+        </div>
+        <main class="container aboutcontent2 ">
+            <div class=" row about">
+                <div class="col-lg-8 col-md-12 ">
+                    <section class="Bio-info">
+                        <h2>Biography</h2>
+                        <p>Makthaba Uthmaan Ibn Affan (Uthmaan Ibn Affan Library) was established to facilitate the
+                            learning,
+                            teaching, and spreading of the Ilm (Knowledge) of the Qur'an and the Sunnah,
+                            as understood and implemented by the Jamaa'ah of Sahabah (the Companions of the Prophet).
+                        </p>
+                        <p>
+                            The Library puts forward the Speech of Allah, the speech of Rasoolullah ﷺ, and the way of
+                            the
+                            Sahabah
+                            over
+                            anything else. We publish books and pamphlets for the Muslims in the Tamil speaking world so
+                            that
+                            they
+                            can benefit out of the knowledge of the Ulama (scholars) who are upon this methodology
+                            (al-Qur'aan and as-Sunnah upon the understanding of the Sahabah).
+                        </p>
+                        <p>
+                            Shaikh Yahya Silmy hafidhahullah is from the people of knowledge who studied the Ilm of
+                            al-Kitab and
+                            as-Sunnah under the scholars of Ahlus Sunnah. He is carrying the da'wah in the Tamil
+                            speaking world
+                            with
+                            attestation and recommendation from the renowned scholars. We are posting his lectures,
+                            articles,
+                            and fatawa in this website and our apps, seeking the Face of Allah.
+                        </p>
+                        <div class="Bio-info">
+
+
+
+
+                            <div>
+
+                                <p>Shaikh Abu AbdirRahman Yahya Silmy was born in Srilanka. He was brought up in Saudi
+                                    Arabia and spent most of his childhood there.
+                                    He had his Islamic education and the worldly education there.</p>
+                                <p>It was the turn of the last century when the giants of Islam of our time such as
+                                    Shaikh al-Albani,
+                                    Shaikh Ibn Baaz, Shaikh Ibn Uthaymeen, etc and their da'wah had made a profound
+                                    impact on the scholars and
+                                    the common people. Shaikh Yahya Silmy happened to be a student at this time,
+                                    and these scholars and their da'wah had a made a very positive influence on him.</p>
+                                <p>He got the opportunity to attend the gatherings of these scholars. When he was a
+                                    student, he got benefitted
+                                    at the gatherings of the scholars of this blessed land. Many scholars who had seen
+                                    Shaikh Yahya's knowledge
+                                    and da'wah have recommended (Tazkiyah) the common people to benefit from his
+                                    knowledge.
+                                    We have listed down a brief introduction of his teachers.</p>
+                            </div>
+                            <div class="studies-info">
+                                <h5>1. Shaikh Muhammadh Naasirudheen al-Albani</h5>
+                                <p>He is the reviver of the religion in our time. His da'wah was all about
+                                    understanding
+                                    all aspects of the
+                                    religion -
+                                    Hadith, Fiqh, Aqeedha, etc upon the understanding of the Sahabah. When Shaikh
+                                    al-Albani was in Jeddah,
+                                    Shaikh Yahya attended his gatherings.
+                                    In addition, he has learnt from all the published books and recorded audio tapes
+                                    of
+                                    Shaikh al-Albani till 1997.
+                                </p>
+                                <h5>2. Shaikh Abdul Azeez ibn Abdullah ibn Baaz</h5>
+                                <p>He is the former Grand Mufti of Saudi Arabia. Shaikh Yahya has attended
+                                    the gatherings of the Shaikh. For 10 continuous years, Shaikh Yahya has attended
+                                    the
+                                    Hajj and Ramadhan gatherings of Shaikh Ibn Baaz. When Imam Ibn Baaz was in
+                                    Jeddah,
+                                    Riyadh and Makkah, Shaikh Yahya got benefitted from him.
+
+                                </p>
+                                <h5>3. Shaikh Mahmoodh Mahdi al-Istanbooli</h5>
+                                <p>He is the first teacher of Shaikh Yahya in the subjects of Aqeedha and Manhaj
+                                    as-Salaf. He is the one who
+                                    introduced the da'wah of Shaikh al-Albani to him. Shaikh Yahya learnt under
+                                    his guidance Tafsir Ibn Kathir, Rawdah an-Nadhiyyah, Fiqhus Sunnah at the
+                                    Shaikh's
+                                    residence.
+
+                                </p>
+                                <h5>4. Shaikh Abdullah as-Somali</h5>
+                                <p>He is the teacher of Shaikh Muqbil ibn Haadhee. When Shaikh Yahya was studying in
+                                    Dar
+                                    al-Hadith, Makkah,
+                                    he learnt lessons from Sahih al-Bukhari under him.
+
+                                </p>
+                                <h5>5. Shaikh Muhammadh ibn Saalih al-Uthaymeen</h5>
+                                <p>When the Shaikh taught at Masjid al-Haram, Makkah during the last 10 days of
+                                    Ramadhan
+                                    in I'thqaaf, Shaikh
+                                    Yahya attended the gatherings and learnt from the Shaikh.
+
+                                </p>
+                                <h5>6. Shaikh ibn Humaidh</h5>
+                                <p>When Shaikh Yahya was studying in Dar al-Hadith, Makkah, he learnt lessons from
+                                    Imam
+                                    ash-Shawkaanee's
+                                    Nailul Awthar under him.
+
+
+                                </p>
+                                <h5>7. Shaikh Abdus Samad al-Khateeb</h5>
+                                <p>He was born in the Indian state of Kerala and studied his Islamic knowledge in
+                                    Saudi
+                                    Arabia.
+                                    He was a professor in Madina University. He was a close friend of Ahmad Ibn
+                                    Yahya
+                                    an-Najmi.
+                                    He is also the teacher of scholars such as Shaikh Saalih as-Suhaymee and Shaikh
+                                    Abdur Razzaq al-Badr.
+                                    Shaikh Yahya learnt from him a kitab from Muwatta Imam Malik.
+                                    He has also had a discussion with him on the affairs of da'wah and knowledge.
+
+                                </p>
+                                <h5>8. Shaikh Abdul Mannan an-Noorpuri al-Bakistani</h5>
+                                <p>Shaikh Yahya got permission (Ijaza) from him to narrate ahadith with isnad.
+
+                                </p>
+
+                            </div>
+
+                            <div class="vid-info">
+                                <iframe width="100%" height="350"
+                                    src="https://www.youtube.com/embed/tXLBh6QkgEs?si=_7_OCv49vBMPU-dp"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+
+
+
+                        </div>
+                    </section>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <section class="image-info">
+                        <h2>Tazkiyaat</h2>
+                        <p>The attestations and recommendations of some of the renowned
+                            scholars for Shaikh Yahya Silmy can be seen here.</p>
+                        <p style="font-size: large; font-weight: 600;">Shaikh Rabee Ibn Hadee al-Madhkalee</p>
+                        <img src="images/rabee.jpg" alt="" width="90%" onclick="openImagePopup(this)">
+
+                        <p style="font-size: large; font-weight: 600;">Shaikh Mahmood Mahdi al-Isthaanbooli</p>
+                        <img src="images/isthaanbooli.jpg" alt="" width="90%" onclick="openImagePopup(this)">
+
+                        <p style="font-size: large; font-weight: 600;">Shaikh Abu Umar Usama Ibn Athaya al-Uthaybee</p>
+                        <img src="images/aluthaibee.jpg" alt="" width="90%" onclick="openImagePopup(this)">
+
+                        <p style="font-size:smaller; font-weight: 600;">The Shaikh's writing by hand:</p>
+                        <img src="images/shaikh handwriting.jpg" alt="" width="90%" onclick="openImagePopup(this)">
+
+                    </section>
+
+                </div>
+
+                <!-- Popup Container (Initially Hidden) -->
+                <div id="Popup" class="popup-overlay" onclick="closeImagePopup()">
+                    <div class="popup-content" onclick="event.stopPropagation();">
+                        <div class="popup-header">
+                            <button class="action-btn" onclick="shareImage()">
+                                <i class="bi bi-share"></i>
+                            </button>
+                            <a id="downloadBtn" download>
+                                <button class="action-btn">
+                                    <i class="bi bi-download"></i>
+                                </button>
+                            </a>
+                            <button class="close-btn" onclick="closeImagePopup()">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                        <img id="popupImage" src="" alt="Popup Image">
+                    </div>
+                </div>
+
+        </main>
+
+
+        <div class="container app-container">
+            <div class="row align-items-center">
+                <!-- Mobile Screen Image -->
+                <div class="col-lg-6 col-md-6 col-sm-12 text-center mb-4">
+                    <img src="images/mobileimages.jpg" alt="Mobile Screen" class="img-fluid" width="100%">
+                </div>
+
+                <!-- About Section -->
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="app-section">
+                        <h2>ABOUT THE APP</h2>
+                        <p>Convallis commodo elementum nec, varius eget nulla. Duis placerat pulvinar elit, nec blandit
+                            mi ornare eu.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check-circle text-success"></i> Donec blandit dapibus ex eu euismod</li>
+                            <li><i class="bi bi-check-circle text-success"></i> Pellentesque habitant morbi tristique
+                            </li>
+                            <li><i class="bi bi-check-circle text-success"></i> Donec blandit dapibus ex eu euismod</li>
+                            <li><i class="bi bi-check-circle text-success"></i> Pellentesque habitant morbi tristique
+                            </li>
+                        </ul>
+
+                        <!-- Stats Section -->
+                        <div class="row stats mt-4">
+                            <div class="col-sm-12 ">
+                                <div class="stat-box ">
+                                    <img src="images/playstoredownload.png" width="200px" alt="">
+                                    <img src="images/appstoredownload.png" width="200px" alt="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+        </script>
+
+        <script>
+            // Function to Open Popup with Image
+            // Function to Open Popup with Image
+            function openImagePopup(imgElement) {
+                const popup = document.getElementById("Popup");
+                const popupImg = document.getElementById("popupImage");
+                const downloadBtn = document.getElementById("downloadBtn");
+                const navbar = document.getElementById("navbar");
+                popupImg.src = imgElement.src; // Set popup image source
+                downloadBtn.href = imgElement.src; // Set download button link
+
+                popup.style.display = "flex"; // Show popup
+                navbar.style.display = "none";
+            }
+
+            // Function to Close Popup
+            function closeImagePopup() {
+                document.getElementById("Popup").style.display = "none";
+                document.getElementById("navbar").style.display = "flex";
+            }
+
+            // Function to Share Image
+            function shareImage() {
+                const imageSrc = document.getElementById("popupImage").src;
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: "Check out this image",
+                        text: "Here is an image I want to share with you.",
+                        url: imageSrc
+                    }).catch(error => console.error("Error sharing:", error));
+                } else {
+                    alert("Sharing is not supported on this browser.");
+                }
+            }
+
+        </script>
+</body>
+
+</html>

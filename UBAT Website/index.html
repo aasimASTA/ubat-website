@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications|Uthman Ibn Affan Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+
+</head>
+
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark top-nav">
+        <div class="container-fluid top-navbar d-flex flex-wrap align-items-center justify-content-between py-2">
+
+            <!-- Language Selection -->
+            <div class="d-flex">
+                <a href="#" class="text-white mx-2">English</a>
+                <a href="#" class="text-white mx-2">தமிழ்</a>
+
+            </div>
+
+            <!-- Contact & Social Links -->
+            <div class="d-flex align-items-center flex-wrap">
+                <a href="#" class="text-white me-2"><i class="bi bi-telephone"></i> +9472 2251277</a>
+                <span class="text-white mx-1 d-none d-md-inline">|</span>
+                <a href="#" class="text-white me-2">✉ cist@ahlulhadith.in</a>
+
+                <!-- Social Icons -->
+                <div class="d-flex mt-2 mt-md-0">
+                    <a href="#" class="text-white mx-2"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top main-navbar " id="navbar">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="./images/UBATLogo.jpg" alt="UBAT">
+            </a>
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+
+                    <!-- Khutba Dropdown -->
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Khutba</a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="jumuah.html">Jumuah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Nikkah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Funeral</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Public Lecture</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Kithab Dropdown with Multi-Column -->
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Kithab</a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Aqeedah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Manhaj</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Fiqh</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Hadith</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Tafseer</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Ibadah Dropdown with Multi-Column -->
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" id="ibadahDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Ibadah
+                        </a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Prayer</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Zakat</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Hajj</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Umrah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Fasting</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Dhikr</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Purification Dropdown with Multi-Column -->
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" id="purificationDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Purification
+                        </a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Heart</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Taubah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Taqwah</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Istigfhar</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Family and Soceity Dropdown with Multi-Column -->
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" id="familyDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Family & Society
+                        </a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Men</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Women</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Children</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Family</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Soceity</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Political Talk</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Biography Dropdown with Multi-Column -->
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" id="biographyDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Biography
+                        </a>
+                        <div class="dropdown-menu custom-dropdown p-3">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="#">Prophet</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Sahabha</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="#">Ulama</a>
+                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="aboutus.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact</a></li>
+                    <li class="nav-item ms-3 mt-1"> <a class="btn btn-primary donate-btn"
+                            href="donationpage.html">Donate</a></li>
+                </ul>
+            </div>
+
+
+
+        </div>
+    </nav>
+
+
+    <!-- Content -->
+    <div class="container-fluid  content">
+
+        <section class="container section-image ">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <iframe src="https://www.youtube.com/embed/MWASciGGwEk?si=zWs7dH-jMrKHFP88"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+
+                            <div class="carousel-item">
+                                <iframe src="https://www.youtube.com/embed/JMOhYg6imoA?si=VdQmBV0xQ2jLTGIw"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="images/What_is_Shirk_ENG.jpg" alt="" onclick="openPopup(this)">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/I’tiqad_of_Sufyan_bin_‘Uyaynah_-_ENG.jpg" alt=""
+                                    onclick="openPopup(this)">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/Defend_Sunnah_And_The__Callers_Of_Sunnah_2_ENG (1).jpg" alt=""
+                                    onclick="openPopup(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="imagePopup" class="popup-overlay" onclick="closePopup()">
+                        <div class="popup-content">
+                            <div class="popup-header">
+                                <button class="action-btn" onclick="shareImage()">
+                                    <i class="bi bi-share"></i>
+                                </button>
+                                <a id="downloadBtn" download>
+                                    <button class="action-btn">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </a>
+                                <button class="close-btn" onclick="closePopup()">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </div>
+                            <img id="popupImg" src="" alt="Popup Image">
+                        </div>
+                    </div>
+
+                    <!-- <----imagePopup---->
+
+
+        </section>
+    </div>
+
+    <div class="container mt-4" id="recentPosts">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3>Recent Posts</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="main-content h-100 d-flex flex-column">
+                            <img src="images/the-first-15-days-of-ramadan-750x430.webp" class="post-img" alt="">
+                            <h5 class="mt-2">The First 15 Days of Ramadan</h5>
+                            <p><small>Bismihi | Feb 17, 2025</small></p>
+                            <p class="flex-grow-1"><small>The honorable Hamza was sent to Sayful-Bahr...</small></p>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex align-items-center popular-post">
+                                    <img src="images/which-surahs-did-the-prophet-muhammad-recite-in-prayers-750x430.webp"
+                                        alt="">
+                                    <a href="#" class="ms-3">Which Surahs Did the Prophet Recite?<br><small>Feb 17,
+                                            2025</small></a>
+                                </li>
+                            </ul>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex align-items-center popular-post">
+                                    <img src="images/which-surahs-did-the-prophet-muhammad-recite-in-prayers-750x430.webp"
+                                        alt="">
+                                    <a href="#" class="ms-3">Which Surahs Did the Prophet Recite?<br><small>Feb 17,
+                                            2025</small></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="main-content h-100 d-flex flex-column">
+                            <img src="images/the-principles-of-prophetic-education-18-turn-your-closeness-into-action-750x430.jpg"
+                                class="post-img" alt="">
+                            <h5 class="mt-2">The Principles of Prophetic Education</h5>
+                            <p><small>Bismihi | Feb 10, 2025</small></p>
+                            <p class="flex-grow-1"><small>In education and teaching, communicative closeness.</small>
+                            </p>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex align-items-center popular-post">
+                                    <img src="images/which-surahs-did-the-prophet-muhammad-recite-in-prayers-750x430.webp"
+                                        alt="">
+                                    <a href="#" class="ms-3">Which Surahs Did the Prophet Recite?<br><small>Feb 17,
+                                            2025</small></a>
+                                </li>
+                            </ul>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex align-items-center popular-post">
+                                    <img src="images/which-surahs-did-the-prophet-muhammad-recite-in-prayers-750x430.webp"
+                                        alt="">
+                                    <a href="#" class="ms-3">Which Surahs Did the Prophet Recite?<br><small>Feb 17,
+                                            2025</small></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h3>Popular Posts</h3>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex align-items-center popular-post">
+                        <img src="images/which-surahs-did-the-prophet-muhammad-recite-in-prayers-750x430.webp" alt="">
+                        <a href="#" class="ms-3">Which Surahs Did the Prophet Recite?<br><small>Feb 17, 2025</small></a>
+                    </li>
+                    <li class="list-group-item d-flex align-items-center popular-post">
+                        <img src="images/masjid-an-nabawi-750x430.webp" alt="">
+                        <a href="#" class="ms-3">The Construction of Masjid an-Nabawi<br><small>Feb 17, 2025</small></a>
+                    </li>
+                    <li class="list-group-item d-flex align-items-center popular-post">
+                        <img src="images/what-did-our-prophet-used-to-wear-750x430.webp" alt="">
+                        <a href="#" class="ms-3">What Did the Messenger Wear?<br><small>Feb 17, 2025</small></a>
+                    </li>
+
+                    <li class="list-group-item d-flex align-items-center popular-post">
+                        <img src="images/which-surahs-did-the-prophet-muhammad-recite-in-prayers-750x430.webp" alt="">
+                        <a href="#" class="ms-3">Which Surahs Did the Prophet Recite?<br><small>Feb 17, 2025</small></a>
+                    </li>
+                    <li class="list-group-item d-flex align-items-center popular-post">
+                        <img src="images/masjid-an-nabawi-750x430.webp" alt="">
+                        <a href="#" class="ms-3">The Construction of Masjid an-Nabawi<br><small>Feb 17, 2025</small></a>
+                    </li>
+                    <li class="list-group-item d-flex align-items-center popular-post">
+                        <img src="images/what-did-our-prophet-used-to-wear-750x430.webp" alt="">
+                        <a href="#" class="ms-3">What Did the Messenger Wear?<br><small>Feb 17, 2025</small></a>
+                    </li>
+                    <li class="list-group-item d-flex align-items-center popular-post">
+                        <img src="images/what-did-our-prophet-used-to-wear-750x430.webp" alt="">
+                        <a href="#" class="ms-3">What Did the Messenger Wear?<br><small>Feb 17, 2025</small></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <footer id="footer" class="footer mt-4" id="footer">
+
+        <div class="container footer-top">
+            <div class="row gy-4">
+                <div class="col-lg-5 col-md-12 footer-about">
+                    <a href="index.html" class="logo d-flex align-items-center">
+                        <span> <img src="images/UBATLogo.jpg" width="170px" height="250px" alt=""> </span>
+                    </a>
+                    <div class="footer-contact pt-3">
+                        <p>Condemn Terrorist attacks in SriLanka Irrespective of religion or race, There is nothing but
+                            evil in extremism!
+                            Allah rest all victim souls in peace. Deepest sorry for families of victims. All in
+                            solidarity demolish terrorist. May Allah make it easy for all authorities. Ameen
+
+                            <br> — Yahya Silmy (@saylanis) April 22, 2019
+                        </p>
+
+                    </div>
+                    <div class="social-links d-flex mt-4">
+                        <a href=""><i class="bi bi-twitter-x"></i></a>
+                        <a href=""><i class="bi bi-facebook"></i></a>
+                        <a href=""><i class="bi bi-instagram"></i></a>
+                        <a href=""><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 ">
+                    <h4 class="text-left mt-3">Useful Links</h4>
+                    <div class="row ">
+                        <div class="col-lg-6  footer-links  ">
+
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="#">Khutba</a></li>
+                                <li><a href="#">Kithab</a></li>
+                                <li><a href="#">Ibadah</a></li>
+                                <li><a href="#">Purification</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-6 footer-links">
+
+                            <ul>
+                                <li><a href="#">Family & Society</a></li>
+                                <li><a href="#">Biography</a></li>
+                                <li><a href="aboutus.html">About</a></li>
+                                <li><a href="ContactUs.html">Contact</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-12 footer-links ">
+                    <h4 class="mt-3">Contact Us</h4>
+                    <p>2/18,Ibrahim Street,</p>
+                    <p>Alandur,</p>
+                    <p>Chennai - 600016.</p>
+                    <p class="mt-3"><strong>Phone:</strong> <span>+9472 2251277</span></p>
+                    <p><a href="mailto:cist@ahlulhadith.in"><strong>Email:</strong> <span>cist@ahlulhadith.in</span></a>
+                    </p>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="container copyright text-center mt-4">
+            <p>© <span>Copyright</span> <strong>UBAT </strong> <span>All Rights Reserved</span></p>
+
+        </div>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+
+
+
+    </script>
+
+    <script>
+
+        function openPopup(imgElement) {
+            const popup = document.getElementById("imagePopup");
+            const popupImg = document.getElementById("popupImg");
+            const downloadBtn = document.getElementById("downloadBtn");
+            const navbar = document.getElementById("navbar"); // Get the navbar element
+            const recentPosts = document.getElementById("recentPosts");
+            const footer = document.getElementById("footer");
+            // Set the image source
+            popupImg.src = imgElement.src;
+
+            // Set the download link
+            downloadBtn.href = imgElement.src;
+
+            // Show the popup
+            popup.style.display = "flex";
+
+            // Hide the navbar,posts,footer
+            navbar.style.display = "none";
+            recentPosts.style.display = "none";
+            footer.style.display = "none";
+        }
+
+        function closePopup() {
+            document.getElementById("imagePopup").style.display = "none";
+            document.getElementById("navbar").style.display = "flex"; // Show navbar again
+
+            if (recentPosts) recentPosts.style.display = "flex";
+            if (footer) {
+                footer.style.display = "flex";
+                footer.style.justifyContent = "center"; // Centers horizontally
+                footer.style.alignItems = "center";
+
+            }
+
+
+        }
+
+        function shareImage() {
+            const imgSrc = document.getElementById("popupImg").src;
+            if (navigator.share) {
+                navigator.share({
+                    title: "Check out this image",
+                    url: imgSrc
+                }).catch(err => console.log("Sharing failed", err));
+            } else {
+                alert("Sharing is not supported in this browser.");
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

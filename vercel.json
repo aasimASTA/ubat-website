@@ -1,8 +1,7 @@
 {
     "version": 2,
-    "public": "public",
     "routes": [
-      { "src": "/(.*)", "dest": "/public/index.html" }
+      { "src": "/(.*)", "dest": "/ubat/index.html" }
     ]
   }
   

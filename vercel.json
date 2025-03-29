@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "public": "ubat/public",
     "routes": [
       { "src": "/(.*)", "dest": "/index.html" }
     ]

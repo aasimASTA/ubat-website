@@ -4,6 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min"; // Ensure Bootstrap JS works
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../assets/style.css" // Import custom styles
 import Logo from "../assets/images/UBATLogo.jpg";
+import { useLanguage } from "../config/LanguageContext";
 
 // Import images correctly
 import ShirkENG from "../assets/images/What_is_Shirk_ENG.jpg";
@@ -18,6 +19,11 @@ import bismilla from "../assets/images/bismilla.webp"
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
 const Home = () => {
+
+  // Toggle used to change Language
+
+  const { language } = useLanguage();
+
   // State for image popup
   const [popupImage, setPopupImage] = useState(null);
 
@@ -68,9 +74,18 @@ const Home = () => {
         <div className="banner-img-content">
           <img src={bismilla} alt="bismillah" width='20%' />
           <h5>
-            Allah rest all victim souls in peace. Deepest sorry for families
-            of victims. All in solidarity demolish terrorist. May Allah make
-            it easy for all authorities. Ameen - Yahya Silmy (@saylanis)
+
+
+            {language === "en" ? (
+              <>
+                Allah rest all victim souls in peace. Deepest sorry for families
+                of victims. All in solidarity demolish terrorist. May Allah make
+                it easy for all authorities. Ameen - Yahya Silmy (@saylanis)
+              </>
+            ) : (
+              <>
+                பாதிக்கப்பட்ட அனைவரின் ஆன்மாக்களுக்கும் அல்லாஹ் சாந்தி அளிப்பானாக. பாதிக்கப்பட்டவர்களின் குடும்பங்களுக்கு ஆழ்ந்த இரங்கல்.அனைவரும் ஒற்றுமையுடன் பயங்கரவாதியை வீழ்த்துவோம்.அல்லாஹ் அனைத்து அதிகாரிகளுக்கும் இதை எளிதாக்குவானாக. ஆமீன் — யஹ்யா சில்மி (@saylanis)</>
+            )}
           </h5>
 
         </div>
@@ -81,9 +96,17 @@ const Home = () => {
             <Col md={6} sm={12} lg={5}>
               <div className="about-title w-100">
                 <h2>
-                  Makthaba Uthmaan <br />
-                  Ibn Affan
 
+                  {language === "en" ? (
+                    <>
+                      Makthaba Uthmaan <br />
+                      Ibn Affan
+                    </>
+                  ) : (
+                    <>
+                      உஸ்மான் இப்னு அஃப்பான் நூலகம்
+                    </>
+                  )}
                 </h2>
                 <p> (Uthmaan Ibn Affan Library)</p>
                 <button className="read-morebtn">Read More</button>
@@ -93,7 +116,21 @@ const Home = () => {
             <Col md={6} sm={12} lg={7}>
               <div className="about-contentinner">
                 <h1 className="fw-bold">السلام عليكم ورحمة الله</h1>
-                <p>Makthaba Uthmaan Ibn Affan (Uthmaan Ibn Affan Library) was established to facilitate the learning, teaching, and spreading of the Ilm (Knowledge) of the Qur'an and the Sunnah, as understood and implemented by the Jamaa'ah of Sahabah (the Companions of the Prophet ﷺ).</p>
+                <p>
+                  {language === "en" ? (
+                    <>
+                      Makthaba Uthmaan Ibn Affan (Uthmaan Ibn Affan Library) was established to facilitate the
+                      learning, teaching and spreading of the Ilm (Knowledge) of the Qur'an and the Sunnah,
+                      as understood and implemented by the Jamaa'ah of Sahabah (the Companions of the Prophet ﷺ).
+                    </>
+                  ) : (
+                    <>
+                      உஸ்மான் இப்னு அஃப்பான் நூலகம் அல்-குர்ஆன், அஸ்-ஸுன்னாஹ்வை ஸஹாபா என்ற ஜமாஅத் எவ்வாறு
+                      விளங்கி செயல்படுத்தினார்களோ அந்த கல்வியைக் கற்று செயல்படுத்தி மக்களுக்கு மத்தியில் பரவலாக்குவதற்காக நிறுவப்பட்டதாகும்.
+                    </>
+                  )}
+
+                </p>
               </div>
             </Col>
           </Row>
@@ -145,40 +182,59 @@ const Home = () => {
       {/* Pillar of Islam Section */}
       <div className="pillar-bg">
         <div className="pillar-content">
-          <h6>ESSENTIALS FOR MUSLIM</h6>
-          <h2>Take the proper knowledge about 5<br /> pillars of Islam</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+          <h6> {language === "en" ? "ESSENTIALS FOR MUSLIM" : "முஸ்லிம்களுக்கான அத்தியாவசியங்கள்"}</h6>
+          <h2>
+            {language === "en" ? (
+              <>
+                Take the proper knowledge about 5 <br />pillars of Islam
+              </>
+            ) : (
+              <>
+                இஸ்லாமின் 5 தூண்கள் பற்றி சரியான அறிவை பெறுங்கள்.
+              </>
+            )}</h2>
+          <p>{language === "en" ? (
+            <>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
+              luctus nec ullamcorper mattis, pulvinar dapibus leo.
+            </>
+          ) : (
+            <>
+              லோரெம் இப்சம் டோலர் சிட் அமெட், கான்செக்டெட்யுர் அடிபிச்சிங் எலிட். உட் எலிட் டெல்லஸ்,
+              லுக்டஸ் நேக் உல்லம்கார்பர் மெட்டிஸ், புல்வினார் டாபிபஸ் லியோ.
+            </>
+          )}</p>
 
           {/* 5 Pillars Icons */}
           <div className="pillars-container">
             <div className="pillar-item">
               <div className="pillar-icon"><i className="fas fa-hand-holding-heart"></i></div>
-              <h4>Shahadah</h4>
-              <p>(Faith)</p>
+              <h4>{language === "en" ? "Shahadah" : "ஷஹாதா"}</h4>
+              <p>{language === "en" ? "(Faith)" : "(நம்பிக்கை)"}</p>
             </div>
 
             <div className="pillar-item">
               <div className="pillar-icon"><i className="fas fa-mosque"></i></div>
-              <h4>Salah</h4>
-              <p>(Prayer)</p>
+              <h4>{language === "en" ? "Salah" : "சலாஹ்"}</h4>
+              <p>{language === "en" ? "(Prayer)" : "(தொழுகை)"}</p>
             </div>
 
             <div className="pillar-item">
               <div className="pillar-icon"><i className="fas fa-utensils"></i></div>
-              <h4>Sawm</h4>
-              <p>(Fasting)</p>
+              <h4>{language === "en" ? "Sawm" : "சவூம்"}</h4>
+              <p>{language === "en" ? "(Fasting)" : "(நோன்பு)"}</p>
             </div>
 
             <div className="pillar-item">
               <div className="pillar-icon"><i className="fa-solid fa-sack-dollar"></i></div>
-              <h4>Zakat</h4>
-              <p>(Almsgiving)</p>
+              <h4>{language === "en" ? "Zakat" : "சகாத்"}</h4>
+              <p>{language === "en" ? "(Almsgiving)" : "(தானம்)"}</p>
             </div>
 
             <div className="pillar-item">
               <div className="pillar-icon"><i className="fas fa-kaaba"></i></div>
-              <h4>Hajj</h4>
-              <p>(Pilgrimage)</p>
+              <h4>{language === "en" ? "Hajj" : "ஹஜ்"}</h4>
+              <p>{language === "en" ? "(Pilgrimage)" : "(புனித பயணம்)"}</p>
             </div>
           </div>
         </div>
@@ -195,11 +251,11 @@ const Home = () => {
               <Card className="border-0">
                 <Card.Img variant="top" src={news.image} />
                 <Card.Body className="bg-light">
-                  <Card.Title className="fw-bold">{news.title}</Card.Title>
+                  <Card.Title className="fw-bold">{news.title[language]}</Card.Title>
                   <Card.Text className="text-muted">
-                  {news.date} 
+                    {news.date}
                   </Card.Text>
-                  <Card.Text>{news.description}</Card.Text>
+                  <Card.Text>{news.description[language]}</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -218,10 +274,10 @@ const Home = () => {
               {recentPosts.map((post, index) => (
                 <div className="col-md-6" key={index}>
                   <div className="main-content h-100 d-flex flex-column">
-                    <img src={post.image} className="post-img" alt={post.title} />
-                    <h5 className="mt-2">{post.title}</h5>
+                    <img src={post.image} className="post-img" alt={post.title[language]} />
+                    <h5 className="mt-2">{post.title[language]}</h5>
                     <p><small>{post.date}</small></p>
-                    <p className="flex-grow-1"><small>{post.description}</small></p>
+                    <p className="flex-grow-1"><small>{post.description[language]}</small></p>
                   </div>
                 </div>
               ))}
@@ -235,8 +291,8 @@ const Home = () => {
                 {popularPosts.map((post, index) => (
                   <div className="col-md-6 mb-3" key={index}>
                     <div className=" list-group-item d-flex align-items-center border p-1 rounded  popular-post">
-                      <img src={post.image} className="post-img" alt={post.title} />
-                      <a href="#" className="ms-3">{post.title}<br /><small>{post.date}</small></a>
+                      <img src={post.image} className="post-img" alt={post.title[language]} />
+                      <a href="#" className="ms-3">{post.title[language]}<br /><small>{post.date}</small></a>
                     </div>
                   </div>
                 ))}
@@ -250,8 +306,8 @@ const Home = () => {
             <ul className="list-group">
               {popularPosts.map((post, index) => (
                 <li className="list-group-item d-flex align-items-center popular-post" key={index}>
-                  <img src={post.image} className="post-img" alt={post.title} />
-                  <a href="#" className="ms-3">{post.title}<br /><small>{post.date}</small></a>
+                  <img src={post.image} className="post-img" alt={post.title[language]} />
+                  <a href="#" className="ms-3">{post.title[language]}<br /><small>{post.date}</small></a>
                 </li>
               ))}
             </ul>
@@ -259,18 +315,29 @@ const Home = () => {
         </div>
       </div>
 
-      
-<div className="donatebg">
-  <Container>
-  <h6>SUPPORT US</h6>
-  <h2>We Need Your Help</h2>
-  <p>The Weekend School of the Islamic Center of Allah is committed to
-     providing quality Islamic Education according to the Quran.
-     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-      luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-  <Button className="donatenow-btn">Donate Now</Button>
-  </Container>
-</div>
+
+      <div className="donatebg">
+        <Container>
+          <h6>{language === "en" ? "SUPPORT US" : "எங்களை ஆதரிக்கவும்"}</h6>
+          <h2>{language === "en" ? "We Need Your Help" : "உங்கள் உதவி தேவை"}</h2>
+          <p>{language === "en" ? (
+            <>
+              The Weekend School of the Islamic Center of Allah is committed to
+              providing quality Islamic Education according to the Quran.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
+              luctus nec ullamcorper mattis, pulvinar dapibus leo.
+            </>
+          ) : (
+            <>
+              அல்லாஹ்வின் இஸ்லாமிய மையம் நடத்தும் வார இறுதி பள்ளி,
+              குர்ஆனின் வழிகாட்டுதல்படி தரமான இஸ்லாமிய கல்வியை வழங்க உறுதிபூண்டுள்ளது.
+              லோரம் இப்சம் டோலர் சிட் அமெட், கான்செக்டெடர் அடிபிசிங் எலிட். யுட் எலிட் டெல்லுஸ்,
+              லுக்டுஸ் நெக் உல்லாம்கார்பர் மாட்டிஸ், புல்வினார் டாபிபஸ் லியோ.
+            </>
+          )}</p>
+          <a href="/donation"><Button className="donatenow-btn">Donate Now</Button></a>
+        </Container>
+      </div>
 
       {/* Footer */}
       <Footer />
@@ -296,87 +363,137 @@ const Home = () => {
 // Sample Data for Recent & Popular Posts
 const newsData = [
   {
-    title: "Which Surahs Did the Prophet Recite?",
+    title: {
+      en: "Which Surahs Did the Prophet Recite?",
+      ta: "நபிகள் நாயகம் எந்த ஸூராக்களை ஓதினார்?",
+    },
     image: First15DaysRamadan, // Replace with actual image URL
     author: "rocken",
     date: "June 8, 2022",
     comments: "No Comments",
-    description:
-      "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
+    description: {
+      en: "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
+      ta: "அம்சமுடைய கல்வி மற்றும் வழிகாட்டுதலுக்கு அரிய ஸூராக்கள்...",
+    },
   },
   {
-    title: 'Health Benefits of Saying “Alhamdulillah”',
+    title: {
+      en: 'Health Benefits of Saying “Alhamdulillah”',
+      ta: '“அல்ஹம்துலில்லாஹ்” என்ற சொல்லின் உடல்நல நன்மைகள்',
+    },
     image: MasjidNabawi, // Replace with actual image URL
-    
+
     date: "June 8, 2022",
     comments: "No Comments",
-    description:
-      "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
+    description: {
+      en: "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
+      ta: "“அல்ஹம்துலில்லாஹ்” எனச் சொல்வது மன அழுத்தத்தை குறைத்து, நன்மையை நினைவுகூர தூண்டுகிறது...",
+    },
   },
   {
-    title: "Islam and the Nature of the Universe",
+    title: {
+      en: "Islam and the Nature of the Universe",
+      ta: "இஸ்லாம் மற்றும் பிரபஞ்சத்தின் இயல்பு",
+    },
     image: SurahRecite, // Replace with actual image URL
     author: "rocken",
     date: "June 8, 2022",
     comments: "No Comments",
-    description:
-      "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
+    description: {
+      en: "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
+      ta: "இஸ்லாம், பிரபஞ்சத்தின் ரீதிகள் மற்றும் இயற்கையின் ஒழுங்கை அல்லாஹ்வின் சின்னங்களாக கருதுகிறது...",
+    },
   },
   {
-    title: "Hajj: The Journey of Hearts",
+    title: {
+      en: "Hajj: The Journey of Hearts",
+      ta: "ஹஜ்ஜ்: இதயங்களின் பயணம்",
+    },
     image: MessengerWear, // Replace with actual image URL
     author: "rocken",
     date: "June 8, 2022",
     comments: "No Comments",
-    description:
-      "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
+    description: {
+      en: "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
+      ta: "ஹஜ்ஜ் என்பது ஒரு ஆன்மிகப் பயணம் மட்டுமல்ல, இது இதயங்களை தூய்மைப்படுத்தும் வழியாகும்...",
+    },
   },
 ];
 
 const recentPosts = [
   {
     image: First15DaysRamadan,
-    title: "The First 15 Days of Ramadan",
+    title: {
+      en: "The First 15 Days of Ramadan",
+      ta: "ரமலானின் முதல் 15 நாட்கள்",
+    },
     date: "Feb 17, 2025",
-    description: "The honorable Hamza was sent to Sayful-Bahr...",
+    description: {
+      en: "The honorable Hamza was sent to Sayful-Bahr...",
+      ta: "ஹம்ஸா அவர்கள் சைபுல்-பஹ்ர் நோக்கி அனுப்பப்பட்டார்...",
+    },
   },
   {
     image: MasjidNabawi,
-    title: "The Principles of Prophetic Education",
+    title: {
+      en: "The Principles of Prophetic Education",
+      ta: "நபிவழிக் கல்வியின் கொள்கைகள்",
+    },
     date: "Feb 10, 2025",
-    description: "In education and teaching, communicative closeness.",
+    description: {
+      en: "In education and teaching, communicative closeness.",
+      ta: "கல்வி மற்றும் கற்பித்தலில், உணர்வுப்பூர்வமான நெருக்கம் முக்கியம்.",
+    },
   },
 ];
 
 const popularPosts = [
   {
     image: SurahRecite,
-    title: "Which Surahs Did the Prophet Recite?",
+    title: {
+      en: "Which Surahs Did the Prophet Recite?",
+      ta: "நபி(ஸல்) அவர்கள் எந்த சூராக்களை ஓதினார்கள்?",
+    },
     date: "Feb 17, 2025",
   },
   {
     image: MasjidNabawi,
-    title: "The Construction of Masjid an-Nabawi",
+    title: {
+      en: "The Construction of Masjid an-Nabawi",
+      ta: "மஸ்ஜித் அல்-நபவியின் கட்டட வேலை",
+    },
     date: "Feb 17, 2025",
   },
   {
     image: MessengerWear,
-    title: "What Did the Messenger Wear?",
+    title: {
+      en: "What Did the Messenger Wear?",
+      ta: "நபி(ஸல்) அவர்கள் என்ன அணிந்தார்கள்?",
+    },
     date: "Feb 17, 2025",
   },
   {
-    image: SurahRecite,
-    title: "Which Surahs Did the Prophet Recite?",
+  image: SurahRecite,
+    title: {
+      en: "Which Surahs Did the Prophet Recite?",
+      ta: "நபி(ஸல்) அவர்கள் எந்த சூராக்களை ஓதினார்கள்?",
+    },
     date: "Feb 17, 2025",
   },
   {
     image: MasjidNabawi,
-    title: "The Construction of Masjid an-Nabawi",
+    title: {
+      en: "The Construction of Masjid an-Nabawi",
+      ta: "மஸ்ஜித் அல்-நபவியின் கட்டட வேலை",
+    },
     date: "Feb 17, 2025",
   },
   {
     image: MessengerWear,
-    title: "What Did the Messenger Wear?",
+    title: {
+      en: "What Did the Messenger Wear?",
+      ta: "நபி(ஸல்) அவர்கள் என்ன அணிந்தார்கள்?",
+    },
     date: "Feb 17, 2025",
   },
 ];

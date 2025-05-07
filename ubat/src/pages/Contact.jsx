@@ -4,9 +4,14 @@ import "bootstrap-icons/font/bootstrap-icons.css"; // Import Bootstrap Icons
 import "../assets/style.css"; // Import custom styles
 import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
+import { useLanguage } from "../config/LanguageContext";
 
 const Contact = () => {
-
+  
+       // Toggle used to change Language
+      
+        const { language } = useLanguage();
+  
   useEffect(() => {
     document.title = "Contact|Uthman Ibn Affan Library";
   }, []);
@@ -80,20 +85,49 @@ const Contact = () => {
             </Col>
           </Row>
           <div class="row location-section mt-5 pb-5">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-4 mb-md-0">
               <div class="location-box">
               <i class="fa-solid fa-location-dot" ></i>
-                <h5><b>Uthman Ibn Affan Library</b></h5>
-                <p>2/18, Ibrahim Street, Alandur, Chennai - 600016</p>
-                <p><strong>Phone:</strong> +94 722251277</p>
+                <h5>{language === "en" ?
+                (<>
+                  <b>Uthman Ibn Affan Library</b>
+                </>) :
+                 (<>
+                 <b>உஸ்மான் இப்னு அஃப்பான் நூலகம்,</b>
+                </>)}</h5>
+                <p>
+                {language === "en" ?
+                (<>
+                  2/18, Ibrahim Street, Alandur, Chennai - 600016
+                </>) :
+                 (<>
+                 2/18, இப்ராஹீம் தெரு,ஆலந்தூர்,சென்னை - 600016.
+                </>)}
+                </p>
+                <p><strong>{language === "en" ? "Phone:":"தொலைபேசி:"}</strong> +94 722251277</p>
+
+                
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 " >
               <div class="location-box">
               <i class="fa-solid fa-mosque" ></i>
-                <h5><b>Masjid Sunnathul Muhammadhiya</b></h5>
-                <p>475, Thakkia Veedhi, Thaluvakode, Kochchikade</p>
-                <p><strong>Phone:</strong> +91 99623 15876</p>
+                <h5>{language === "en" ?
+                (<>
+                 <b>Masjid Sunnathul Muhammadhiya</b>
+                </>) :
+                 (<>
+                 <b>மஸ்ஜித் சுன்னத்துல் முஹம்மதியா,</b>
+                </>)}</h5>
+                <p>{language === "en" ?
+                (<>
+                  475, Thakkia Veedhi, Thaluvakode, Kochchikade
+                </>) :
+                 (<>
+                 2/18, தக்கியா வீதி,தழுவகொட்டுவ,&nbsp; கொச்சிக்கடை
+                </>)}
+                </p>
+                <p><strong>{language === "en" ? "Phone:":"தொலைபேசி:"}</strong>  +91 9962315876</p>
               </div>
             </div>
           </div>

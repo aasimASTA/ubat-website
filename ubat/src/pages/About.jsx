@@ -89,7 +89,7 @@ const About = () => {
                     <div className=" about">
                         <div className="">
                             <section className="Bio-info">
-                                <h2 className="text-center ">Biography</h2>
+                                <h2 className="text-center ">{language === "en" ? "Biography" : "பயோகிராபி"}</h2>
                                 <p>
                                     {language === "en" ? (
 

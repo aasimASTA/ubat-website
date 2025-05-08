@@ -70,7 +70,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="home_banner">
+      <div className={`home_banner ${language === "ta" ? "tamil-font" : ""}`}>
         <div className="banner-img-content">
           <img src={bismilla} alt="bismillah" width='20%' />
           <h5>

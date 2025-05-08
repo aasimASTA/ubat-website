@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { LanguageProvider } from "./config/LanguageContext"; // ✅ Import LanguageProvider
+import { LanguageProvider, useLanguage } from "./config/LanguageContext"; // ✅ use useLanguage hook
+
 // Import files 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -12,8 +13,10 @@ import Article from "./pages/JumuahArticle";
 import PropheticEducation from "./pages/PropheticEducation";
 import "./assets/style.css";
 
-function App() {
+// ✅ Inner App with language context
+function AppContent() {
   const [popupActive, setPopupActive] = useState(false);
+  const { language } = useLanguage(); // ✅ use hook to get language
 
   useEffect(() => {
     if (popupActive) {
@@ -24,22 +27,29 @@ function App() {
   }, [popupActive]);
 
   return (
-    
-      <LanguageProvider> {/* ✅ Wrap with LanguageProvider */}
-        <Router>
-          <Navbar popupActive={popupActive} />
-          <Routes>
-            <Route path="/" element={<Home setPopupActive={setPopupActive} />} />
-            <Route path="/about" element={<About setPopupActive={setPopupActive} />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/donation" element={<Donate />} />
-            <Route path="/jumuah" element={<Jumuah />} />
-            <Route path="/article" element={<Article />} />
-            <Route path="/prophet" element={<PropheticEducation />} />
-          </Routes>
-        </Router>
-      </LanguageProvider>
-    
+    <div className={language === "tamil" ? "lang-tamil" : "lang-english"}>
+      <Router>
+        <Navbar popupActive={popupActive} />
+        <Routes>
+          <Route path="/" element={<Home setPopupActive={setPopupActive} />} />
+          <Route path="/about" element={<About setPopupActive={setPopupActive} />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/donation" element={<Donate />} />
+          <Route path="/jumuah" element={<Jumuah />} />
+          <Route path="/article" element={<Article />} />
+          <Route path="/prophet" element={<PropheticEducation />} />
+        </Routes>
+      </Router>
+    </div>
+  );
+}
+
+// ✅ Main app wrapped in LanguageProvider
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }
 

@@ -2,6 +2,19 @@ body {
   font-family:"Nunito",sans-serif;
   background-color:#fdfdfd;
 }
+/* Tamil font adjustments */
+.tamil-font .nav-link {
+  font-size: 0.8rem; /* or adjust as needed */
+}
+
+.tamil-font .dropdown-menu a {
+  font-size: 0.76rem;
+}
+
+.tamil-font .dropdown-menu p {
+  font-size: 0.76rem;
+}
+
 
 .top-nav {
   background-color: #80bcf8;
@@ -40,7 +53,9 @@ body {
   margin: auto; 
   z-index: 200;
   max-width: 1150px;
-  height:175px;
+   height: auto;  /* Adjust dropdown height to content size */
+  max-height: 500px; /* Optional: set a max height if you want to prevent too tall dropdowns */
+  overflow-y: auto;
    /* Set a max-width for large screens */
 }
 
@@ -95,10 +110,10 @@ body {
 
 } 
 
-.search-bar-container {
+/* .search-bar-container {
   top: 80px;
   z-index: 100;
-}
+} */
 
 
 
@@ -124,7 +139,9 @@ body {
   line-height: 1.8;    /* Or use center if preferred */
   word-break: break-word;
 }
-
+.tamil-font .banner-img-content h5{
+  font-size: 17px;
+}
 @media (max-width: 576px) {
   .read-morebtn {
     margin-bottom: 1.5rem; /* Adjust spacing as needed */
@@ -253,7 +270,15 @@ body {
   cursor: pointer;
   width: 100%;
 }
-
+.tamil-font .donate-btn{
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  width: 100%;
+}
 
 .donate-btn:hover {
   background-color: #0571ff;

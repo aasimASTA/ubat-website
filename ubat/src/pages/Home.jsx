@@ -6,10 +6,7 @@ import "../assets/style.css" // Import custom styles
 import Logo from "../assets/images/UBATLogo.jpg";
 import { useLanguage } from "../config/LanguageContext";
 
-// Import images correctly
-import ShirkENG from "../assets/images/What_is_Shirk_ENG.jpg";
-import ItiqadofSufyanbinUyaynah from "../assets/images/I’tiqad_of_Sufyan_bin_‘Uyaynah_-_ENG.jpg";
-import DefendSunnah from "../assets/images/Defend_Sunnah_And_The__Callers_Of_Sunnah_2_ENG.jpg";
+
 import First15DaysRamadan from "../assets/images/the-first-15-days-of-ramadan-750x430.webp";
 
 import SurahRecite from "../assets/images/which-surahs-did-the-prophet-muhammad-recite-in-prayers-750x430.webp";
@@ -66,30 +63,83 @@ const Home = () => {
   };
 
   // Image carousel list
-  const carouselImages = [ShirkENG, ItiqadofSufyanbinUyaynah, DefendSunnah];
+  // const carouselImages = [ShirkENG, ItiqadofSufyanbinUyaynah, DefendSunnah];
 
   return (
     <>
-      <div className={`home_banner ${language === "ta" ? "tamil-font" : ""}`}>
-        <div className="banner-img-content">
-          <img src={bismilla} alt="bismillah" width='20%' />
-          <h5>
+      <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+      <div className="carousel-inner">
+    
+        <div className="carousel-item active">
+          <div className={`home_banner ${language === "ta" ? "tamil-font" : ""}`}>
+            <div className="banner-img-content">
+              <img src={bismilla} alt="bismillah" className="bismilla-img"/>
+              <h5>
+                {language === "en" ? (
+                  <>
+                    Allah rest all victim souls in peace. Deepest sorry for families
+                    of victims. All in solidarity demolish terrorist. May Allah make
+                    it easy for all authorities. Ameen - Yahya Silmy (@saylanis)
+                  </>
+                ) : (
+                  <>
+                    பாதிக்கப்பட்ட அனைவரின் ஆன்மாக்களுக்கும் அல்லாஹ் சாந்தி அளிப்பானாக. பாதிக்கப்பட்டவர்களின் குடும்பங்களுக்கு ஆழ்ந்த இரங்கல்.
+                    அனைவரும் ஒற்றுமையுடன் பயங்கரவாதியை வீழ்த்துவோம். அல்லாஹ் அனைத்து அதிகாரிகளுக்கும் இதை எளிதாக்குவானாக. ஆமீன் — யஹ்யா சில்மி (@saylanis)
+                  </>
+                )}
+              </h5>
+            </div>
+          </div>
+        </div>
 
+      
+        <div className="carousel-item">
+          <div className="home_banner">
+            <div>
+              <iframe
+                      src="https://www.youtube.com/embed/MWASciGGwEk?si=zWs7dH-jMrKHFP88"
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+            </div>
+          </div>
+        </div>
 
-            {language === "en" ? (
-              <>
-                Allah rest all victim souls in peace. Deepest sorry for families
-                of victims. All in solidarity demolish terrorist. May Allah make
-                it easy for all authorities. Ameen - Yahya Silmy (@saylanis)
-              </>
-            ) : (
-              <>
-                பாதிக்கப்பட்ட அனைவரின் ஆன்மாக்களுக்கும் அல்லாஹ் சாந்தி அளிப்பானாக. பாதிக்கப்பட்டவர்களின் குடும்பங்களுக்கு ஆழ்ந்த இரங்கல்.அனைவரும் ஒற்றுமையுடன் பயங்கரவாதியை வீழ்த்துவோம்.அல்லாஹ் அனைத்து அதிகாரிகளுக்கும் இதை எளிதாக்குவானாக. ஆமீன் — யஹ்யா சில்மி (@saylanis)</>
-            )}
-          </h5>
-
+        <div className="carousel-item">
+          <div className="home_banner">
+            <div>
+             <iframe
+                      src="https://www.youtube.com/embed/JMOhYg6imoA?si=VdQmBV0xQ2jLTGIw"
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+            </div>
+          </div>
         </div>
       </div>
+
+  
+      <a
+        className="carousel-control-prev"
+        href="#carouselExampleControls"
+        role="button"
+        data-bs-slide="prev"
+      >
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </a>
+      <a
+        className="carousel-control-next"
+        href="#carouselExampleControls"
+        role="button"
+        data-bs-slide="next"
+      >
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </a>
+    </div> 
       <div className="Aboutsection">
         <Container>
           <Row className="pb-5">
@@ -137,47 +187,7 @@ const Home = () => {
         </Container>
 
 
-        {/* Video and Image Carousel Section */}
-        <section className="container section-image pt-5">
-          <div className="row">
-            {/* Video Carousel */}
-            <div className="col-lg-7">
-              <div id="videoCarousel" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                  <div className="carousel-item active">
-                    <iframe
-                      src="https://www.youtube.com/embed/MWASciGGwEk?si=zWs7dH-jMrKHFP88"
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                  <div className="carousel-item">
-                    <iframe
-                      src="https://www.youtube.com/embed/JMOhYg6imoA?si=VdQmBV0xQ2jLTGIw"
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Image Carousel */}
-            <div className="col-lg-5">
-              <div id="imageCarousel" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                  {carouselImages.map((img, index) => (
-                    <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
-                      <img src={img} alt={`Slide ${index + 1}`} onClick={() => openPopup(img)} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+       
       </div>
       {/* Pillar of Islam Section */}
       <div className="pillar-bg">
@@ -568,3 +578,117 @@ const Footer = () => (
 );
 
 export default Home;
+
+
+// // Import images correctly
+// // import ShirkENG from "../assets/images/What_is_Shirk_ENG.jpg";
+// // import ItiqadofSufyanbinUyaynah from "../assets/images/I’tiqad_of_Sufyan_bin_‘Uyaynah_-_ENG.jpg";
+// // import DefendSunnah from "../assets/images/Defend_Sunnah_And_The__Callers_Of_Sunnah_2_ENG.jpg";
+
+
+//  {/* Video and Image Carousel Section */}
+//         {/* <section className="container section-image pt-5">
+//           <div className="row"> */}
+//             {/* Video Carousel */}
+//             {/* <div className="col-lg-7">
+//               <div id="videoCarousel" className="carousel slide" data-bs-ride="carousel">
+//                 <div className="carousel-inner">
+//                   <div className="carousel-item active">
+//                     <iframe
+//                       src="https://www.youtube.com/embed/MWASciGGwEk?si=zWs7dH-jMrKHFP88"
+//                       title="YouTube video player"
+//                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+//                       allowFullScreen
+//                     ></iframe>
+//                   </div>
+//                   <div className="carousel-item">
+//                     <iframe
+//                       src="https://www.youtube.com/embed/JMOhYg6imoA?si=VdQmBV0xQ2jLTGIw"
+//                       title="YouTube video player"
+//                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+//                       allowFullScreen
+//                     ></iframe>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div> */}
+
+//             {/* Image Carousel */}
+//             {/* <div className="col-lg-5">
+//               <div id="imageCarousel" className="carousel slide" data-bs-ride="carousel">
+//                 <div className="carousel-inner">
+//                   {carouselImages.map((img, index) => (
+//                     <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
+//                       <img src={img} alt={`Slide ${index + 1}`} onClick={() => openPopup(img)} />
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </section> */}
+
+// src/pages/Home.jsx
+
+// import React, { useEffect, useState } from "react";
+// import { db } from "../config/firebase";
+// import { collection, getDocs } from "firebase/firestore";
+
+// const Home = () => {
+//   const [posts, setPosts] = useState([]);
+//   const [language, setLanguage] = useState("english"); // Toggle this to 'tamil' to switch
+
+//  useEffect(() => {
+//   const fetchPosts = async () => {
+//     try {
+//       const postsRef = collection(db, "apps", language, "posts");
+//       const snapshot = await getDocs(postsRef);
+//       console.log("Docs fetched:", snapshot.docs.length);
+//       snapshot.docs.forEach(doc => console.log("Doc:", doc.id, doc.data()));
+
+//       const postData = snapshot.docs.map(doc => ({
+//         id: doc.id,
+//         ...doc.data(),
+//       }));
+//       setPosts(postData);
+//     } catch (error) {
+//       console.error("Error fetching posts:", error);
+//     }
+//   };
+
+//   fetchPosts();
+// }, [language]);
+
+//   return (
+//     <div className="p-4">
+//       <div className="mb-4">
+//         <button onClick={() => setLanguage("english")} className="mr-2 px-4 py-2 bg-blue-500 text-white rounded">English</button>
+//         <button onClick={() => setLanguage("tamil")} className="px-4 py-2 bg-green-500 text-white rounded">தமிழ்</button>
+//       </div>
+
+//       <h1 className="text-2xl font-bold mb-4">{language.toUpperCase()} Posts</h1>
+
+//       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+//         {posts.map(post => (
+//           <div key={post.id} className="border p-4 rounded shadow">
+//             {post.imageUrl && (
+//               <img
+//                 src={post.imageUrl}
+//                 alt={post.title}
+//                 className="w-full h-48 object-cover mb-3 rounded"
+//               />
+//             )}
+//             <h2 className="text-xl font-semibold">{post.title}</h2>
+//             <p className="text-sm text-gray-600 mb-2">{post.date}</p>
+//             <p>{post.description}</p>
+//             {post.category && (
+//               <p className="mt-2 text-sm text-blue-500">Category: {post.category}</p>
+//             )}
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Home;

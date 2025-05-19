@@ -115,38 +115,171 @@ body {
   z-index: 100;
 } */
 
+.category-toggle i {
+  transition: transform 0.2s ease;
+}
 
+.category-toggle.collapsed i {
+  transform: rotate(0deg);
+}
+
+.category-toggle[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.breadcrumb {
+  font-size: 30px;
+  font-weight: 500;
+  margin: 20px 0 10px 0;
+  color: #333;
+  text-align: left;
+}
+
+/* input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+} */
 
 
 /************home banner****************/
-.home_banner {
-  background-image: url('../assets/images/homebg.webp') !important;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100%;
-  
-}
-.banner-img-content{
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 12%;
-  color: white;
-  text-align: center;
-}
-.banner-img-content h5{
-  font-family: "Croissant One", serif;
-  font-weight: 400;
-  line-height: 1.8;    /* Or use center if preferred */
-  word-break: break-word;
-}
+  .home_banner {
+      position: relative;
+      padding: 3% 6%;
+    }
+
+    .banner-img-content {
+      position: relative;
+      background-image: url('../assets/images/homebg.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      text-align: center;
+      padding: 12%;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .banner-img-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* dark overlay */
+      z-index: 0;
+    }
+
+    .banner-img-content img,
+    .banner-img-content h5 {
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner-img-content h5 {
+      font-family: "Croissant One", serif;
+      font-weight: 400;
+      line-height: 1.8;
+      word-break: break-word;
+      margin-top: 20px;
+    }
 .tamil-font .banner-img-content h5{
   font-size: 17px;
 }
-@media (max-width: 576px) {
-  .read-morebtn {
-    margin-bottom: 1.5rem; /* Adjust spacing as needed */
+
+@media (max-width: 768px) {
+  .bismilla-img {
+    width: 60%; /* Adjust width for smaller screens */
+    max-width: 140px;
+    
+     /* Set a smaller max-width for mobile screens */
   }
 }
+/* .floating-search-box {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  z-index: 1050;
+  width: 250px;
+  background-color: white;
+
+  padding: 8px;
+  border-radius: 5px;
+
+} */
+
+/* @media (max-width: 768px) {
+ .floating-search-box {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 75%;
+  margin-left: auto;
+  margin-right: 2%; 
+}
+} */
+
+
+/* @media (max-width: 576px) {
+  .read-morebtn {
+    margin-bottom: 1.5rem; 
+  }
+
+} */
+.search {
+  width: 100%;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .search {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Carousel Container - Ensures full-width responsiveness */
+
+
+/* Set a minimum height for iframe */
+.carousel-item iframe {
+  min-height: 450px;
+  /* Adjust as needed */
+
+  /* Prevents excessively large iframe */
+  width: 100%;
+  object-fit: cover;
+  /* Ensures images fill space properly */
+  border-radius: 5px;
+
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .carousel-item iframe {
+    min-height: 300px;
+    /* Smaller height on mobile */
+    max-height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-item iframe {
+    min-height: 250px;
+    max-height: 300px;
+  }
+}
+
+
 
 /****************************/
 .pillar-bg {
@@ -311,49 +444,7 @@ body {
 
 
 
-/* Carousel Container - Ensures full-width responsiveness */
-.carousel {
-  width: 100%;
-}
 
-/* Set a minimum height for iframe */
-.carousel-item iframe {
-  min-height: 450px;
-  /* Adjust as needed */
-
-  /* Prevents excessively large iframe */
-  width: 700px;
-  object-fit: cover;
-  /* Ensures images fill space properly */
-  border-radius: 5px;
-
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .carousel-item iframe {
-    min-height: 200px;
-    /* Smaller height on mobile */
-    max-height: 350px;
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel-item iframe {
-    min-height: 150px;
-    max-height: 300px;
-  }
-}
-
-.carousel-item img {
-
-  /* Prevents excessively large images */
-  width: 100%;
-  height: 450px;
-  object-fit: contain;
-  /* Ensures images fill space properly */
-  border-radius: 5px;
-}
 
 
 /* Pop Image for Home and About Us*/

@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { LanguageProvider, useLanguage } from "./config/LanguageContext"; // ✅ use useLanguage hook
+import { LanguageProvider, useLanguage } from "./config/LanguageContext";
 
-// Import files 
+// Pages & Components
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Donate from "./pages/Donate";
-import Jumuah from "./pages/Jumuah";
-import Article from "./pages/JumuahArticle";
-import PropheticEducation from "./pages/PropheticEducation";
+
+import CategoryPage from "./pages/CategoryPage"; // ✅ Dynamic category page
+
 import "./assets/style.css";
 
-// ✅ Inner App with language context
+// ✅ Inner app with LanguageContext
 function AppContent() {
   const [popupActive, setPopupActive] = useState(false);
-  const { language } = useLanguage(); // ✅ use hook to get language
+  const { language } = useLanguage();
 
   useEffect(() => {
-    if (popupActive) {
-      document.body.classList.add("popup-active");
-    } else {
-      document.body.classList.remove("popup-active");
-    }
+    document.body.classList.toggle("popup-active", popupActive);
   }, [popupActive]);
 
   return (
-    <div className={language === "tamil" ? "lang-tamil" : "lang-english"}>
+    <div className={language === "ta" ? "lang-tamil" : "lang-english"}>
       <Router>
         <Navbar popupActive={popupActive} />
         <Routes>
@@ -35,16 +31,17 @@ function AppContent() {
           <Route path="/about" element={<About setPopupActive={setPopupActive} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/donation" element={<Donate />} />
-          <Route path="/jumuah" element={<Jumuah />} />
-          <Route path="/article" element={<Article />} />
-          <Route path="/prophet" element={<PropheticEducation />} />
+          
+
+          {/* ✅ Unified Dynamic Page for All Categories (e.g. jumuah, nikkah, aqeedah, etc.) */}
+          <Route path="/category/:slug" element={<CategoryPage />} />
         </Routes>
       </Router>
     </div>
   );
 }
 
-// ✅ Main app wrapped in LanguageProvider
+// ✅ App root wrapped with LanguageProvider
 function App() {
   return (
     <LanguageProvider>

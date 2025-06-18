@@ -1,22 +1,27 @@
 import React, { useState } from "react";
-
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/style.css";  // Import global styles
 import Logo from "../assets/images/UBATLogo.jpg";
 import { useLanguage } from "../config/LanguageContext";
-import { NavLink } from "react-router-dom";
+
 const Navbar = () => {
   const { switchLanguage, language } = useLanguage();
   const [searchText, setSearchText] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const navigate = useNavigate();
 
 
+ const handleSearchSubmit = (e) => {
+  e.preventDefault();
+  if (searchText.trim()) {
+    navigate(`/?search=${encodeURIComponent(searchText.trim().toLowerCase())}`);
+    setShowSearch(false);
+    setSearchText("");
+  }
+};
 
-  const handleSearchChange = (e) => {
-    setSearchText(e.target.value);
-  };
- 
+
 
   const socialLinks = [
     { icon: "bi-twitter-x", url: "https://twitter.com" },
@@ -97,17 +102,17 @@ const Navbar = () => {
 
 
               {showSearch && (
-                <form className=" d-flex align-items-center position-relative ">
+                <form onSubmit={handleSearchSubmit} className="d-flex align-items-center position-relative">
                   <input
-        className="search rounded-pill"
-        type="text"
-        value={searchText}
-        onChange={handleSearchChange}
-        placeholder="Eg:ஸஹாபா,aqeedha"
-      />
-      <button type="submit" className="btn position-absolute end-0 me-2 p-0">
-        <i className="bi bi-search text-black"></i>
-      </button>
+                    type="text"
+                    className="search rounded-pill"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                    placeholder="Eg: ஸஹாபா, aqeedah"
+                  />
+                  <button type="submit" className="btn position-absolute end-0 me-2 p-0">
+                    <i className="bi bi-search text-black"></i>
+                  </button>
                 </form>
               )}
             </div>
@@ -143,53 +148,64 @@ const Navbar = () => {
 
 
               {/* Dropdown Menus */}
-              {renderDropdown(language === "en" ? "Khutbah" : "குத்பா", [
-                {
-                  to: "/jumuah",
-                  text: language === "en" ? "Jumuah" : "ஜுமுஆ",
-                  description: language === "en" ? "Listen to the Friday Khutbah and gain knowledge." : "ஜுமுஆ குத்பா கேட்கவும் அறிவைப் பெறுங்கள்."
-                },
-                {
-                  to: "/nikkah",
-                  text: language === "en" ? "Nikkah" : "நிக்காஹ்",
-                  description: language === "en" ? "Learn about the Islamic wedding ceremony and its significance." : "இஸ்லாமிய மணமுறையும் அதன் முக்கியத்துவமும் பற்றி கற்றுக்கொள்ளுங்கள்."
-                },
-                {
-                  to: "/funeral",
-                  text: language === "en" ? "Funeral" : "ஜனாஸா",
-                  description: language === "en" ? "Understand the Islamic rites and practices for funerals." : "இஸ்லாமிய இறுதி உரிமைகளையும் பழக்கவழக்கங்களையும் புரிந்துகொள்ளுங்கள்."
-                },
-                {
-                  to: "/public-lecture",
-                  text: language === "en" ? "Eid" : "ஈத்  ",
-                  description: language === "en" ? "Attend insightful Islamic lectures on various topics." : "பல்வேறு தலைப்புகளில் முக்கியமான இஸ்லாமிய சொற்பொழிவுகளைக் கேளுங்கள்."
-                }
-              ], closeMenu)}
+              {
+                renderDropdown(language === "en" ? "Khutbah" : "குத்பா", [
+                  {
+                    to: "/category/jumuah",
+                    text: language === "en" ? "Jumuah" : "ஜுமுஆ",
+                    description: language === "en"
+                      ? "Listen to the Friday Khutbah and gain knowledge."
+                      : "ஜுமுஆ குத்பா கேட்கவும் அறிவைப் பெறுங்கள்."
+                  },
+                  {
+                    to: "/category/nikkah",
+                    text: language === "en" ? "Nikkah" : "நிக்காஹ்",
+                    description: language === "en"
+                      ? "Learn about the Islamic wedding ceremony and its significance."
+                      : "இஸ்லாமிய மணமுறையும் அதன் முக்கியத்துவமும் பற்றி கற்றுக்கொள்ளுங்கள்."
+                  },
+                  {
+                    to: "/category/funeral",
+                    text: language === "en" ? "Funeral" : "ஜனாஸா",
+                    description: language === "en"
+                      ? "Understand the Islamic rites and practices for funerals."
+                      : "இஸ்லாமிய இறுதி உரிமைகளையும் பழக்கவழக்கங்களையும் புரிந்துகொள்ளுங்கள்."
+                  },
+                  {
+                    to: "/category/eid",
+                    text: language === "en" ? "Eid" : "ஈத்",
+                    description: language === "en"
+                      ? "Attend insightful Islamic lectures on various topics."
+                      : "பல்வேறு தலைப்புகளில் முக்கியமான இஸ்லாமிய சொற்பொழிவுகளைக் கேளுங்கள்."
+                  }
+                ], closeMenu)
+              }
+
 
 
               {renderDropdown(language === "en" ? "Kithab" : "கிதாப் ", [
                 {
-                  to: "/aqeedah",
+                  to: "/category/aqeedah",
                   text: language === "en" ? "Aqeedah" : "அகீதா",  // English / Tamil
                   description: language === "en" ? "Learn about the core beliefs and principles of Islamic faith." : "இஸ்லாமிய நம்பிக்கைகள் மற்றும் கொள்கைகள் பற்றி அறிக."  // English / Tamil
                 },
                 {
-                  to: "/manhaj",
-                  text: language === "en" ? "Manhaj" : "மன்ஹாஜ்",  // English / Tamil
+                  to: "/category/manhaj",
+                  text: language === "en" ? "Manhaj" : "மன்ஹஜ்",  // English / Tamil
                   description: language === "en" ? "Understand the correct methodology in practicing and preaching Islam." : "இஸ்லாம் பயிற்சி மற்றும் வினை செய்யும் முறையை புரிந்துகொள்ளவும்."  // English / Tamil
                 },
                 {
-                  to: "/fiqh",
+                  to: "/category/fiqh",
                   text: language === "en" ? "Fiqh" : "ஃபிக்ஹ்",  // English / Tamil
                   description: language === "en" ? "Explore Islamic jurisprudence and its application in daily life." : "இஸ்லாமிய சட்டம் மற்றும் அதன் தினசரி வாழ்க்கையில் பயன்பாடு பற்றி ஆராய்க."  // English / Tamil
                 },
                 {
-                  to: "/hadith",
+                  to: "/category/hadith",
                   text: language === "en" ? "Hadith" : "ஹதீஸ்",  // English / Tamil
                   description: language === "en" ? "Study the sayings and actions of Prophet Muhammad (ﷺ)." : "பிரபரத் முகம்மது (ﷺ) அவர்களின் சொல்லுகளையும் செயல்களையும் படியுங்கள்."  // English / Tamil
                 },
                 {
-                  to: "/tafseer",
+                  to: "/category/tafseer",
                   text: language === "en" ? "Tafseer" : "தஃப்சீர்",  // English / Tamil
                   description: language === "en" ? "Gain insights into the interpretation and meaning of the Quran." : "குரான் பொருளை மற்றும் அதன் விளக்கம் பற்றி பூரணமாக புரிந்துகொள்ளுங்கள்."  // English / Tamil
                 }
@@ -198,42 +214,42 @@ const Navbar = () => {
 
               {renderDropdown(language === "en" ? "Ibadah" : "இபாதா ", [
                 {
-                  to: "/prayer",
+                  to: "/category/prayer",
                   text: language === "en" ? "Prayer" : "தொழுகை",
                   description: language === "en"
                     ? "Learn the correct way to perform daily prayers (Salah)."
                     : "தினசரி தொழுகைகளை சரியான முறையில் படிக்க கற்றுக்கொள்ளுங்கள்."
                 },
                 {
-                  to: "/zakat",
+                  to: "/category/zakat",
                   text: language === "en" ? "Zakat" : "ஜகாத்",
                   description: language === "en"
                     ? "Understand the importance of charity and how to calculate Zakat."
                     : "தானத்தின் முக்கியத்துவம் மற்றும் சகாதாவை கணக்கிடும் முறை பற்றி அறிக."
                 },
                 {
-                  to: "/hajj",
+                  to: "/category/hajj",
                   text: language === "en" ? "Hajj" : "ஹஜ்",
                   description: language === "en"
                     ? "Discover the rituals and significance of the pilgrimage to Mecca."
                     : "மக்கா ஹஜ் யாத்திரையின் சடங்குகள் மற்றும் முக்கியத்துவத்தை அறியுங்கள்."
                 },
                 {
-                  to: "/umrah",
+                  to: "/category/umrah",
                   text: language === "en" ? "Umrah" : "உம்ரா",
                   description: language === "en"
                     ? "Learn about the spiritual journey of Umrah and its practices."
                     : "உம்ரா யாத்திரையின் ஆன்மீக பயணம் மற்றும் நடைமுறைகளை அறிக."
                 },
                 {
-                  to: "/fasting",
+                  to: "/category/fasting",
                   text: language === "en" ? "Fasting" : "நோன்பு",
                   description: language === "en"
                     ? "Explore the rulings and virtues of fasting in Ramadan and beyond."
                     : "ரமலான் மற்றும் பிற நாட்களில் உண்ணாவிரதத்தின் விதிகள் மற்றும் فضல்களைப் பற்றி அறிக."
                 },
                 {
-                  to: "/dhikr",
+                  to: "/category/dhikr",
                   text: language === "en" ? "Dhikr" : "திக்ர்",
                   description: language === "en"
                     ? "Enhance your remembrance of Allah through Dhikr and supplications."
@@ -244,28 +260,28 @@ const Navbar = () => {
 
               {renderDropdown(language === "en" ? "Purification" : "ப்யூரிபிகேஷன்", [
                 {
-                  to: "/heart",
+                  to: "/category/heart",
                   text: language === "en" ? "Heart" : "ஹார்ட்",
                   description: language === "en"
                     ? "Cleanse your heart from impurities through sincere worship."
                     : "மனமார்ந்த இறைபூஜையின் மூலம் இதயத்தை அகழ்வுகளிலிருந்து தூய்மைப்படுத்துங்கள்."
                 },
                 {
-                  to: "/taubah",
+                  to: "/category/taubah",
                   text: language === "en" ? "Taubah" : "தவ்பா",
                   description: language === "en"
                     ? "Learn the correct way of seeking repentance and returning to Allah."
                     : "தவப்பெயர்ச்சி கேட்டு அல்லாஹ்விடம் திரும்பும் முறையை அறிக."
                 },
                 {
-                  to: "/taqwah",
+                  to: "/category/taqwah",
                   text: language === "en" ? "Taqwah" : "தக்வா",
                   description: language === "en"
                     ? "Strengthen your mindfulness and awareness of Allah in all actions."
                     : "அல்லாஹ்வின் பயத்தை மற்றும் விழிப்புணர்வை உங்கள் செயல்களில் வலுப்படுத்துங்கள்."
                 },
                 {
-                  to: "/istighfar",
+                  to: "/category/istighfar",
                   text: language === "en" ? "Istighfar" : "இஸ்திக்ஃபார்",
                   description: language === "en"
                     ? "Understand the importance of seeking forgiveness in daily life."
@@ -276,42 +292,42 @@ const Navbar = () => {
 
               {renderDropdown(language === "en" ? "Family & Society" : "குடும்பம் & சமூகம்", [
                 {
-                  to: "/men",
+                  to: "/category/men",
                   text: language === "en" ? "Men" : "ஆண்கள்",
                   description: language === "en"
                     ? "Explore the roles, responsibilities, and virtues of men in Islam."
                     : "இஸ்லாமில் ஆண்களின் பொறுப்புகள் மற்றும் நற்குணங்களை ஆராயுங்கள்."
                 },
                 {
-                  to: "/women",
+                  to: "/category/women",
                   text: language === "en" ? "Women" : "பெண்கள்",
                   description: language === "en"
                     ? "Learn about the status, rights, and duties of women in Islam."
                     : "இஸ்லாமில் பெண்களின் நிலை, உரிமைகள் மற்றும் கடமைகளை அறிக."
                 },
                 {
-                  to: "/children",
+                  to: "/category/children",
                   text: language === "en" ? "Children" : "குழந்தைகள்",
                   description: language === "en"
                     ? "Understand Islamic teachings on raising righteous children."
                     : "நல்லொழுக்கமான குழந்தைகளை வளர்க்கும் இஸ்லாமிய வழிகாட்டுதல்களை புரிந்துகொள்ளுங்கள்."
                 },
                 {
-                  to: "/family",
+                  to: "/category/family",
                   text: language === "en" ? "Family" : "குடும்பம்",
                   description: language === "en"
                     ? "Discover ways to maintain harmony and strong family ties."
                     : "சமரசத்தையும் உறுதியான குடும்ப பிணைப்புகளையும் நிலைநிறுத்தும் வழிகளை தெரிந்துகொள்ளுங்கள்."
                 },
                 {
-                  to: "/society",
+                  to: "/category/society",
                   text: language === "en" ? "Society" : "சமூகம்",
                   description: language === "en"
                     ? "Contribute positively to society through Islamic values."
                     : "இஸ்லாமிய மதிப்பீடுகள் மூலம் சமூகத்தில் நேர்மறையான பங்களிப்பை வழங்குங்கள்."
                 },
                 {
-                  to: "/political-talk",
+                  to: "/category/political-talk",
                   text: language === "en" ? "Political Talk" : "அரசியல்",
                   description: language === "en"
                     ? "Engage in discussions on Islamic perspectives on politics and governance."
@@ -322,21 +338,21 @@ const Navbar = () => {
 
               {renderDropdown(language === "en" ? "Biography" : "பயோகிராபி", [
                 {
-                  to: "/prophet",
+                  to: "/category/prophet",
                   text: language === "en" ? "Prophet" : "ப்ராபட்ஸ்",
                   description: language === "en"
                     ? "Study the life, teachings, and character of Prophet Muhammad (ﷺ)."
                     : "நபி முகம்மது (ﷺ) அவர்களின் வாழ்க்கை, போதனைகள் மற்றும் நற்குணங்களை அறிக."
                 },
                 {
-                  to: "/sahabha",
+                  to: "/category/sahabha",
                   text: language === "en" ? "Sahabha" : "சஹாபா",
                   description: language === "en"
                     ? "Learn about the companions of the Prophet and their contributions to Islam."
                     : "நபி அவர்களின் துணைவர்கள் மற்றும் அவர்கள் இஸ்லாத்துக்காக செய்த பங்களிப்புகளை அறிக."
                 },
                 {
-                  to: "/ulama",
+                  to: "/category/ulama",
                   text: language === "en" ? "Ulama" : "உலமா",
                   description: language === "en"
                     ? "Explore the lives and legacies of Islamic scholars and leaders."
@@ -379,178 +395,3 @@ const Navbar = () => {
   );
 };
 export default Navbar;
-{/* Search Icon */ }
-{/* Search Icon Toggle 
-<i
-  className="bi bi-search mx-2"
-  style={{
-    cursor: 'pointer',
-    color: 'black',
-    marginTop: '8px'
-  }}
-  onClick={() => setShowSearch(!showSearch)}
-></i>
-
-{/* Floating Search Bar */}
-{/* {showSearch && (
-  <div className="floating-search-box">
-    <input
-      type="text"
-      className="form-control"
-      placeholder={language === "en" ? "Search..." : "தேடு..."}
-      autoFocus
-    />
-  </div> */}
-{/* )} */ }
-// {/* <div className="search-bar-container py-3 bg-light shadow-sm sticky-top">
-//   <div className="container">
-//     <div className="row g-2 justify-content-center">
-//       <div className="col-12 col-md-5">
-//         <div className="position-relative">
-//           <input
-//             type="text"
-//             className="form-control rounded-pill pe-5"
-//             placeholder="Eg: ஸஹாபா, aqeedha"
-//           />
-//           <i
-//             className="bi bi-search position-absolute text-muted"
-//             style={{
-//               top: '50%',
-//               right: '15px',
-//               transform: 'translateY(-50%)',
-//               cursor: 'pointer',
-//             }}
-//           ></i>
-//         </div>
-//       </div>
-//       <div className="col-12 col-md-4">
-//         <select className="form-select rounded-pill" defaultValue="">
-//           <option value="" disabled>Select Category</option>
-//           {categories.map((cat, index) => (
-//             <option key={index} value={cat.slug}>
-//               {cat.name} ({cat.count})
-//             </option>
-//           ))}
-//         </select>
-//       </div>
-//     </div>
-//   </div>
-// </div> */}
-
-
-// {/* <div className="search-bar-container py-3 bg-light shadow-sm sticky-top">
-//   <div className="container">
-//     <div className="row justify-content-center">
-//       <div className="col-12 col-md-8 position-relative">
-//         <input
-//           type="text"
-//           className="form-control rounded-pill ps-4 pe-5"
-//           placeholder="Eg: ஸஹாபா, aqeedha"
-//         />
-//         <i
-//           className="bi bi-search position-absolute text-muted"
-//           style={{
-//             top: '50%',
-//             right: '25px',
-//             transform: 'translateY(-50%)',
-//             cursor: 'pointer',
-//             fontSize: '1.25rem',
-//           }}
-//         ></i>
-//       </div>
-//     </div>
-//   </div>
-// </div> */}
-// function renderDropdown(title, links ,closeMenu) {
-//   return (
-//     <li className="nav-item">
-//       <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">{title}</a>
-//       <div className="dropdown-menu custom-dropdown p-3">
-//         <div className="row">
-//           {links.map((link, index) => (
-//             <div className="col-md-4" key={index}>
-//               <Link to={link.to} onClick={closeMenu} >{link.text}</Link>
-//               <p>{link.description}</p>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </li>
-//   );
-// }
-
-
-
-{/* <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-      <div className="carousel-inner">
-    
-        <div className="carousel-item active">
-          <div className={`home_banner ${language === "ta" ? "tamil-font" : ""}`}>
-            <div className="banner-img-content">
-              <img src={bismilla} alt="bismillah" className="bismilla-img"/>
-              <h5>
-                {language === "en" ? (
-                  <>
-                    Allah rest all victim souls in peace. Deepest sorry for families
-                    of victims. All in solidarity demolish terrorist. May Allah make
-                    it easy for all authorities. Ameen - Yahya Silmy (@saylanis)
-                  </>
-                ) : (
-                  <>
-                    பாதிக்கப்பட்ட அனைவரின் ஆன்மாக்களுக்கும் அல்லாஹ் சாந்தி அளிப்பானாக. பாதிக்கப்பட்டவர்களின் குடும்பங்களுக்கு ஆழ்ந்த இரங்கல்.
-                    அனைவரும் ஒற்றுமையுடன் பயங்கரவாதியை வீழ்த்துவோம். அல்லாஹ் அனைத்து அதிகாரிகளுக்கும் இதை எளிதாக்குவானாக. ஆமீன் — யஹ்யா சில்மி (@saylanis)
-                  </>
-                )}
-              </h5>
-            </div>
-          </div>
-        </div>
-
-      
-        <div className="carousel-item">
-          <div className="home_banner">
-            <div>
-              <iframe
-                      src="https://www.youtube.com/embed/MWASciGGwEk?si=zWs7dH-jMrKHFP88"
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-            </div>
-          </div>
-        </div>
-
-        <div className="carousel-item">
-          <div className="home_banner">
-            <div>
-             <iframe
-                      src="https://www.youtube.com/embed/JMOhYg6imoA?si=VdQmBV0xQ2jLTGIw"
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-
-  
-      <a
-        className="carousel-control-prev"
-        href="#carouselExampleControls"
-        role="button"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </a>
-      <a
-        className="carousel-control-next"
-        href="#carouselExampleControls"
-        role="button"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </a>
-    </div> */}

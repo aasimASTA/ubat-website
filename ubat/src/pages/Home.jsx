@@ -1,145 +1,267 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is loaded
-import "bootstrap/dist/js/bootstrap.bundle.min"; // Ensure Bootstrap JS works
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "../assets/style.css" // Import custom styles
-import Logo from "../assets/images/UBATLogo.jpg";
-import { useLanguage } from "../config/LanguageContext";
-
-
-import First15DaysRamadan from "../assets/images/the-first-15-days-of-ramadan-750x430.webp";
-
-import SurahRecite from "../assets/images/which-surahs-did-the-prophet-muhammad-recite-in-prayers-750x430.webp";
-import MasjidNabawi from "../assets/images/masjid-an-nabawi-750x430.webp";
-import MessengerWear from "../assets/images/what-did-our-prophet-used-to-wear-750x430.webp";
-import bismilla from "../assets/images/bismilla.webp"
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { useLanguage } from "../config/LanguageContext";
+import { useLocation,useNavigate } from "react-router-dom";
+import { db } from "../config/firebase";
+import {
+  collection, query, orderBy, limit, getDocs
+} from "firebase/firestore";
 
+import audioThumb from "../assets/images/audiothumb.jpg";
+import textThumb from "../assets/images/text-thumb.png";
+import bismilla from "../assets/images/bismilla.webp";
+import Logo from "../assets/images/UBATLogo.jpg";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "../assets/style.css";
+
+
+ const renderTextContent = (text) => (
+    <div dangerouslySetInnerHTML={{ __html: text }} />
+  );
 const Home = () => {
 
-  // Toggle used to change Language
-
+  // Toggle used to change Language 
+  const navigate = useNavigate();
   const { language } = useLanguage();
+  const lang = language === "ta" ? "tamil" : "english";
+  const { search,key: locationKey} = useLocation();
+  const searchQuery = new URLSearchParams(search).get("search")?.toLowerCase() || "";
 
-  // State for image popup
-  const [popupImage, setPopupImage] = useState(null);
+  const [recentPosts, setRecentPosts] = useState([]);
+  const [newsData, setNewsData] = useState([]);
+  const [popularPosts, setPopularPosts] = useState([]);
+  const [popularPost, setPopularPost] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupItems, setPopupItems] = useState([]);
+  const [popupIndex, setPopupIndex] = useState(0);
 
+
+const [visibleSearchResults, setVisibleSearchResults] = useState([]);
+const [visibleCount, setVisibleCount] = useState(10);
 
   useEffect(() => {
-    document.title = "Publications|Uthman Ibn Affan Library";
-  }, []);
+  if (searchQuery) {
+    const title =
+      language === "ta"
+        ? `"${searchQuery}" : Search Results | Uthman Ibn Affan Library`
+        : `"${searchQuery}" : Search Results | Uthman Ibn Affan Library`;
+    document.title = title;
+  } else {
+    document.title =
+       "Publications | Uthman Ibn Affan Library";
+  }
+}, [searchQuery, language]);
 
-  useEffect(() => {
-    if (popupImage) {
-      document.body.classList.add("popup-active");
-    } else {
-      document.body.classList.remove("popup-active");
-    }
-  }, [popupImage]);
+
 
 
   // Function to open image popup
-  const openPopup = (imageSrc) => {
-    setPopupImage(imageSrc);
-  };
+useEffect(() => {
+  const fetchPosts = async () => {
+    try {
+      const postsRef = collection(db, "apps", lang, "posts");
+      const topPostsQuery = query(postsRef, orderBy("published", "desc"));
+      const postsSnap = await getDocs(topPostsQuery);
 
-  // Function to close image popup
-  const closePopup = () => {
-    setPopupImage(null);
-  };
-
-  // Function to share image
-  const shareImage = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Check out this image",
-          url: popupImage,
+      const postsWithFirstItem = await Promise.all(
+        postsSnap.docs.map(async (doc) => {
+          const post = { id: doc.id, ...doc.data() };
+          const itemRef = collection(db, "apps", lang, "posts", doc.id, "items");
+          const itemQuery = query(itemRef, orderBy("position"), limit(1));
+          const itemSnap = await getDocs(itemQuery);
+          const firstItem = itemSnap.docs[0]?.data();
+          return { ...post, firstItem };
         })
-        .catch((err) => console.log("Sharing failed", err));
-    } else {
-      alert("Sharing is not supported in this browser.");
+      );
+
+      if (searchQuery) {
+  const lowerQuery = searchQuery.toLowerCase();
+
+  const filtered = postsWithFirstItem.filter((post) => {
+    const titleTa = post.title?.tamil?.toLowerCase() || "";
+    const titleEn = post.title?.english?.toLowerCase() || "";
+    const cat = post.category?.toLowerCase() || "";
+    const tags = post.tags?.toLowerCase() || "";
+
+    const isMatch =
+      titleTa.includes(lowerQuery) ||
+      titleEn.includes(lowerQuery) ||
+      cat.includes(lowerQuery) ||
+      tags.includes(lowerQuery);
+
+    if (isMatch) {
+      console.log("✅ Match Found:", {
+        id: post.id,
+        titleEn: post.title?.english,
+        titleTa: post.title?.tamil,
+        category: post.category,
+        tags: post.tags,
+      });
+    }
+
+    return isMatch;
+  });
+
+  console.log(`🔍 Total Matches for "${searchQuery}": ${filtered.length}`);
+
+  setSearchResults(filtered);
+  setVisibleSearchResults(filtered.slice(0, 10));
+  setVisibleCount(10);
+}
+ else {
+        // Regular load
+        const imagesPosts = postsWithFirstItem.filter(p => p.category?.toLowerCase());
+        // const audioTextPosts = postsWithFirstItem.filter(p => ["audios", "text"].includes(p.category?.toLowerCase()));
+        setRecentPosts(imagesPosts.slice(0, 4));
+        setNewsData(imagesPosts.slice(4, 8));
+        setPopularPosts(imagesPosts.slice(0, 4));
+        const shuffled = [...imagesPosts].sort(() => 0.5 - Math.random());
+        setPopularPost(shuffled.slice(0, 4));
+      }
+    } catch (err) {
+      console.error("Error fetching posts:", err);
     }
   };
 
-  // Image carousel list
-  // const carouselImages = [ShirkENG, ItiqadofSufyanbinUyaynah, DefendSunnah];
+  fetchPosts();
+}, [language, searchQuery,locationKey]);
+
+useEffect(() => {
+  const searchParams = new URLSearchParams(window.location.search);
+  const query = searchParams.get("search");
+
+  if (!query && performance.getEntriesByType("navigation")[0]?.type === "reload") {
+    // If page is reloaded and there’s no search query, reset to homepage
+    navigate("/", { replace: true });
+  }
+}, []);
+
+
+
+ const handleLoadMore = () => {
+  const next = visibleCount + 10;
+  setVisibleSearchResults(searchResults.slice(0, next));
+  setVisibleCount(next);
+};
+  //  On post click — load full items for carousel
+  const openPopup = async (postId) => {
+    const itemsRef = collection(db, "apps", lang, "posts", postId, "items");
+    const itemsSnap = await getDocs(itemsRef);
+    const allItems = itemsSnap.docs.map((doc) => doc.data());
+
+    setPopupItems(allItems);
+    setPopupIndex(0);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => setShowPopup(false);
+  const nextItem = () => setPopupIndex((i) => (i + 1) % popupItems.length);
+  const prevItem = () => setPopupIndex((i) => (i - 1 + popupItems.length) % popupItems.length);
+
+  // render Date for posts published and thumbnail for each post
+  const renderDate = (date) =>
+    date
+      ? new Date(
+        typeof date === "object" && date.toDate
+          ? date.toDate()
+          : date
+      ).toLocaleDateString()
+      : "No Date";
+
+  const getThumbnail = (item) => {
+    if (!item) return "/default.jpg";
+    const link = item.link || "";
+    if (link.match(/\.(jpeg|jpg|png|webp|gif)$/i)) return link;
+    if (link.includes(".mp3")) return audioThumb;
+    if (link.includes(".mp4")) return "/video-thumbnail.jpg";
+    if (item.text_content) return textThumb;
+    return "/default.jpg";
+  };
+
+
 
   return (
     <>
-      <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-      <div className="carousel-inner">
-    
-        <div className="carousel-item active">
-          <div className={`home_banner ${language === "ta" ? "tamil-font" : ""}`}>
-            <div className="banner-img-content">
-              <img src={bismilla} alt="bismillah" className="bismilla-img"/>
-              <h5>
-                {language === "en" ? (
-                  <>
-                    Allah rest all victim souls in peace. Deepest sorry for families
-                    of victims. All in solidarity demolish terrorist. May Allah make
-                    it easy for all authorities. Ameen - Yahya Silmy (@saylanis)
-                  </>
-                ) : (
-                  <>
-                    பாதிக்கப்பட்ட அனைவரின் ஆன்மாக்களுக்கும் அல்லாஹ் சாந்தி அளிப்பானாக. பாதிக்கப்பட்டவர்களின் குடும்பங்களுக்கு ஆழ்ந்த இரங்கல்.
-                    அனைவரும் ஒற்றுமையுடன் பயங்கரவாதியை வீழ்த்துவோம். அல்லாஹ் அனைத்து அதிகாரிகளுக்கும் இதை எளிதாக்குவானாக. ஆமீன் — யஹ்யா சில்மி (@saylanis)
-                  </>
-                )}
-              </h5>
+    {
+      !searchQuery && (
+        <>
+          <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+
+          <div className="carousel-item active">
+            <div className={`home_banner ${language === "ta" ? "tamil-font" : ""}`}>
+              <div className="banner-img-content">
+                <img src={bismilla} alt="bismillah" className="bismilla-img" />
+                <h5>
+                  {language === "en" ? (
+                    <>
+                      Allah rest all victim souls in peace. Deepest sorry for families
+                      of victims. All in solidarity demolish terrorist. May Allah make
+                      it easy for all authorities. Ameen - Yahya Silmy (@saylanis)
+                    </>
+                  ) : (
+                    <>
+                      பாதிக்கப்பட்ட அனைவரின் ஆன்மாக்களுக்கும் அல்லாஹ் சாந்தி அளிப்பானாக. பாதிக்கப்பட்டவர்களின் குடும்பங்களுக்கு ஆழ்ந்த இரங்கல்.
+                      அனைவரும் ஒற்றுமையுடன் பயங்கரவாதியை வீழ்த்துவோம். அல்லாஹ் அனைத்து அதிகாரிகளுக்கும் இதை எளிதாக்குவானாக. ஆமீன் — யஹ்யா சில்மி (@saylanis)
+                    </>
+                  )}
+                </h5>
+              </div>
+            </div>
+          </div>
+
+
+          <div className="carousel-item">
+            <div className="home_banner">
+              <div>
+                <iframe
+                  src="https://www.youtube.com/embed/MWASciGGwEk?si=zWs7dH-jMrKHFP88"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          <div className="carousel-item">
+            <div className="home_banner">
+              <div>
+                <iframe
+                  src="https://www.youtube.com/embed/JMOhYg6imoA?si=VdQmBV0xQ2jLTGIw"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
             </div>
           </div>
         </div>
 
-      
-        <div className="carousel-item">
-          <div className="home_banner">
-            <div>
-              <iframe
-                      src="https://www.youtube.com/embed/MWASciGGwEk?si=zWs7dH-jMrKHFP88"
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-            </div>
-          </div>
-        </div>
 
-        <div className="carousel-item">
-          <div className="home_banner">
-            <div>
-             <iframe
-                      src="https://www.youtube.com/embed/JMOhYg6imoA?si=VdQmBV0xQ2jLTGIw"
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-            </div>
-          </div>
-        </div>
+        <a
+          className="carousel-control-prev"
+          href="#carouselExampleControls"
+          role="button"
+          data-bs-slide="prev"
+        >
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </a>
+        <a
+          className="carousel-control-next"
+          href="#carouselExampleControls"
+          role="button"
+          data-bs-slide="next"
+        >
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </a>
       </div>
-
-  
-      <a
-        className="carousel-control-prev"
-        href="#carouselExampleControls"
-        role="button"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </a>
-      <a
-        className="carousel-control-next"
-        href="#carouselExampleControls"
-        role="button"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </a>
-    </div> 
       <div className="Aboutsection">
         <Container>
           <Row className="pb-5">
@@ -187,7 +309,7 @@ const Home = () => {
         </Container>
 
 
-       
+
       </div>
       {/* Pillar of Islam Section */}
       <div className="pillar-bg">
@@ -249,23 +371,23 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/**latest news */}
+
       <Container className="my-5">
         <div className="d-flex align-items-center pb-4">
           <h2 className="text-purple me-3">Latest News</h2>
           <div className="flex-grow-1 line"></div>
         </div>
         <Row>
-          {newsData.map((news, index) => (
-            <Col md={3} key={index}>
+          {newsData.map((post) => (
+            <Col md={3} key={post.id} onClick={() => openPopup(post.id)} style={{ cursor: "pointer" }}>
               <Card className="border-0">
-                <Card.Img variant="top" src={news.image} />
+                <Card.Img variant="top" src={getThumbnail(post.firstItem)} />
                 <Card.Body className="bg-light">
-                  <Card.Title className="fw-bold">{news.title[language]}</Card.Title>
+                  <Card.Title className="fw-bold">{post.title?.[language] || post.title}</Card.Title>
                   <Card.Text className="text-muted">
-                    {news.date}
+                    {renderDate(post.published)}
                   </Card.Text>
-                  <Card.Text>{news.description[language]}</Card.Text>
+              
                 </Card.Body>
               </Card>
             </Col>
@@ -280,14 +402,14 @@ const Home = () => {
           {/* Recent Posts Section (Left) */}
           <div className="col-lg-8">
             <h3>Recent Posts</h3>
-            <div className="row g-4">
-              {recentPosts.map((post, index) => (
-                <div className="col-md-6" key={index}>
+            <div className="row g-4 mt-2">
+              {recentPosts.map((post) => (
+                <div className="col-md-6" key={post.id} onClick={() => openPopup(post.id)} style={{ cursor: "pointer" }}>
                   <div className="main-content h-100 d-flex flex-column">
-                    <img src={post.image} className="post-img" alt={post.title[language]} />
-                    <h5 className="mt-2">{post.title[language]}</h5>
-                    <p><small>{post.date}</small></p>
-                    <p className="flex-grow-1"><small>{post.description[language]}</small></p>
+                    <img src={getThumbnail(post.firstItem)} className="post-img" alt={post.title} />
+                    <h5 className="mt-2">{post.title?.[language] || post.title}</h5>
+                    <p><small>{renderDate(post.published)}</small></p>
+
                   </div>
                 </div>
               ))}
@@ -298,11 +420,11 @@ const Home = () => {
 
               <div className="row">
 
-                {popularPosts.map((post, index) => (
-                  <div className="col-md-6 mb-3" key={index}>
+                {popularPost.map((post) => (
+                  <div className="col-md-6 mb-3" key={post.id} onClick={() => openPopup(post.id)} style={{ cursor: "pointer" }}>
                     <div className=" list-group-item d-flex align-items-center border p-1 rounded  popular-post">
-                      <img src={post.image} className="post-img" alt={post.title[language]} />
-                      <a href="#" className="ms-3">{post.title[language]}<br /><small>{post.date}</small></a>
+                      <img src={getThumbnail(post.firstItem)} className="post-img" />
+                      <a href="#" className="ms-3">{post.title?.[language] || post.title}<br /><small>{renderDate(post.published)}</small></a>
                     </div>
                   </div>
                 ))}
@@ -314,17 +436,16 @@ const Home = () => {
           <div className="col-lg-4">
             <h3>Popular Posts</h3>
             <ul className="list-group">
-              {popularPosts.map((post, index) => (
-                <li className="list-group-item d-flex align-items-center popular-post" key={index}>
-                  <img src={post.image} className="post-img" alt={post.title[language]} />
-                  <a href="#" className="ms-3">{post.title[language]}<br /><small>{post.date}</small></a>
+              {popularPosts.map((post) => (
+                <li className="list-group-item d-flex align-items-center popular-post" key={post.id} onClick={() => openPopup(post.id)} style={{ cursor: "pointer" }}>
+                  <img src={getThumbnail(post.firstItem)} className="post-img" alt={post.title} />
+                  <a href="#" className="ms-3">{post.title?.[language] || post.title}<br /> <small>{renderDate(post.published)}</small></a>
                 </li>
               ))}
             </ul>
           </div>
         </div>
       </div>
-
 
       <div className="donatebg">
         <Container>
@@ -348,20 +469,105 @@ const Home = () => {
           <a href="/donation"><Button className="donatenow-btn">Donate Now</Button></a>
         </Container>
       </div>
+      <Footer />
+        </>
+      )
+    }
+      
+      {/**latest news */}
+      
+{searchQuery && (
+  <Container className="my-5">
+    <h4>
+      {searchResults.length} post{searchResults.length !== 1 && "s"} found on{" "}
+      <strong>"{searchQuery}"</strong>
+    </h4>
+    <Row>
+      {visibleSearchResults.map((post) => (
+        <Col md={3} key={post.id} onClick={() => openPopup(post.id)} style={{ cursor: "pointer" }}>
+          <Card className="border-0 mt-4">
+            <Card.Img variant="top" src={getThumbnail(post.firstItem)} />
+            <Card.Body className="bg-light">
+              <Card.Title>{post.title?.[language] || post.title}</Card.Title>
+              <Card.Text className="text-muted">{renderDate(post.published)}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      ))}
+    </Row>
+
+    {/* 🔘 Load More */}
+    {visibleCount < searchResults.length && (
+      <div className="text-center mt-4">
+        <button className="btn btn-primary" onClick={handleLoadMore}>
+          Load More
+        </button>
+      </div>
+    )}
+  </Container>
+)}
+
 
       {/* Footer */}
-      <Footer />
+      
 
-      {/* Image Popup */}
-      {popupImage && (
-        <div className="popup-overlay" onClick={closePopup}>
-          <div className="popup-content">
-            <div className="popup-header">
-              <button className="action-btn" onClick={shareImage}><i className="bi bi-share"></i></button>
-              <a href={popupImage} download className="action-btn"><i className="bi bi-download"></i></a>
-              <button className="close-btn" onClick={closePopup}><i className="bi bi-x-lg"></i></button>
+      {/* 🪟 Popup for All Items */}
+         {showPopup && (
+        <div className="popup-overlay d-flex justify-content-center align-items-center"
+          style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", background: "rgba(0,0,0,0.8)", zIndex: 1050 }}>
+          <div className="popup-content bg-white p-4 rounded position-relative"
+            style={{ maxWidth: "700px", width: "100%", maxHeight: "90vh", overflowY: "auto" }}>
+            <div className="position-absolute top-0 end-0 m-3 d-flex gap-3">
+  {/* 🔽 Download button */}
+  {popupItems[popupIndex]?.link?.match(/\.(jpeg|jpg|png|webp|gif)$/i) && (
+    <a
+      href={popupItems[popupIndex].link}
+      download
+      title="Download Image"
+    >
+     <span style={{fontSize: "22px",color:"black"}} ><i className="bi bi-download"></i></span> 
+    </a>
+  )}
+
+  {popupItems[popupIndex]?.text_content && (
+    <a
+      href={`data:text/plain;charset=utf-8,${encodeURIComponent(popupItems[popupIndex].text_content)}`}
+      download={`${popupItems[popupIndex].title || "text-content"}.txt`}
+      title="Download Text"
+    >
+      <span style={{fontSize: "22px",color:"black"}} ><i className="bi bi-download"></i></span> 
+    </a>
+  )}
+
+  {/* ❌ Close button */}
+  <button className="btn-close mt-1" style={{fontSize: "16px",color:"black"}} onClick={closePopup}></button>
+</div>
+
+            <div className="text-center">
+              {popupItems[popupIndex] && (
+                <>
+                  <h5>{popupItems[popupIndex].title}</h5>
+                  {popupItems[popupIndex].link?.includes(".mp3") ? (
+                    <audio controls src={popupItems[popupIndex].link} style={{ width: "100%" }} />
+                  ) : popupItems[popupIndex].link?.match(/\.(jpeg|jpg|png|webp|gif)$/i) ? (
+                    <img src={popupItems[popupIndex].link} alt="" style={{ maxWidth: "100%" }} />
+                  ) : popupItems[popupIndex].link?.includes(".mp4") ? (
+                    <video controls width="100%">
+                      <source src={popupItems[popupIndex].link} type="video/mp4" />
+                    </video>
+                  ) : popupItems[popupIndex].text_content ? (
+                    renderTextContent(popupItems[popupIndex].text_content)
+                  ) : (
+                    <p>No valid content</p>
+                  )}
+                </>
+              )}
+
+              <div className="d-flex justify-content-between mt-3">
+                <button className="btn btn-outline-secondary" onClick={prevItem}>← Prev</button>
+                <button className="btn btn-outline-secondary" onClick={nextItem}>Next →</button>
+              </div>
             </div>
-            <img src={popupImage} alt="Popup" />
           </div>
         </div>
       )}
@@ -370,143 +576,7 @@ const Home = () => {
   );
 };
 
-// Sample Data for Recent & Popular Posts
-const newsData = [
-  {
-    title: {
-      en: "Which Surahs Did the Prophet Recite?",
-      ta: "நபிகள் நாயகம் எந்த ஸூராக்களை ஓதினார்?",
-    },
-    image: First15DaysRamadan, // Replace with actual image URL
-    author: "rocken",
-    date: "June 8, 2022",
-    comments: "No Comments",
-    description: {
-      en: "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
-      ta: "அம்சமுடைய கல்வி மற்றும் வழிகாட்டுதலுக்கு அரிய ஸூராக்கள்...",
-    },
-  },
-  {
-    title: {
-      en: 'Health Benefits of Saying “Alhamdulillah”',
-      ta: '“அல்ஹம்துலில்லாஹ்” என்ற சொல்லின் உடல்நல நன்மைகள்',
-    },
-    image: MasjidNabawi, // Replace with actual image URL
 
-    date: "June 8, 2022",
-    comments: "No Comments",
-    description: {
-      en: "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
-      ta: "“அல்ஹம்துலில்லாஹ்” எனச் சொல்வது மன அழுத்தத்தை குறைத்து, நன்மையை நினைவுகூர தூண்டுகிறது...",
-    },
-  },
-  {
-    title: {
-      en: "Islam and the Nature of the Universe",
-      ta: "இஸ்லாம் மற்றும் பிரபஞ்சத்தின் இயல்பு",
-    },
-    image: SurahRecite, // Replace with actual image URL
-    author: "rocken",
-    date: "June 8, 2022",
-    comments: "No Comments",
-    description: {
-      en: "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
-      ta: "இஸ்லாம், பிரபஞ்சத்தின் ரீதிகள் மற்றும் இயற்கையின் ஒழுங்கை அல்லாஹ்வின் சின்னங்களாக கருதுகிறது...",
-    },
-  },
-  {
-    title: {
-      en: "Hajj: The Journey of Hearts",
-      ta: "ஹஜ்ஜ்: இதயங்களின் பயணம்",
-    },
-    image: MessengerWear, // Replace with actual image URL
-    author: "rocken",
-    date: "June 8, 2022",
-    comments: "No Comments",
-    description: {
-      en: "Taciti euismod sem convallis dis morbi arcu odio condimentum himenaeos mus...",
-      ta: "ஹஜ்ஜ் என்பது ஒரு ஆன்மிகப் பயணம் மட்டுமல்ல, இது இதயங்களை தூய்மைப்படுத்தும் வழியாகும்...",
-    },
-  },
-];
-
-const recentPosts = [
-  {
-    image: First15DaysRamadan,
-    title: {
-      en: "The First 15 Days of Ramadan",
-      ta: "ரமலானின் முதல் 15 நாட்கள்",
-    },
-    date: "Feb 17, 2025",
-    description: {
-      en: "The honorable Hamza was sent to Sayful-Bahr...",
-      ta: "ஹம்ஸா அவர்கள் சைபுல்-பஹ்ர் நோக்கி அனுப்பப்பட்டார்...",
-    },
-  },
-  {
-    image: MasjidNabawi,
-    title: {
-      en: "The Principles of Prophetic Education",
-      ta: "நபிவழிக் கல்வியின் கொள்கைகள்",
-    },
-    date: "Feb 10, 2025",
-    description: {
-      en: "In education and teaching, communicative closeness.",
-      ta: "கல்வி மற்றும் கற்பித்தலில், உணர்வுப்பூர்வமான நெருக்கம் முக்கியம்.",
-    },
-  },
-];
-
-const popularPosts = [
-  {
-    image: SurahRecite,
-    title: {
-      en: "Which Surahs Did the Prophet Recite?",
-      ta: "நபி(ஸல்) அவர்கள் எந்த சூராக்களை ஓதினார்கள்?",
-    },
-    date: "Feb 17, 2025",
-  },
-  {
-    image: MasjidNabawi,
-    title: {
-      en: "The Construction of Masjid an-Nabawi",
-      ta: "மஸ்ஜித் அல்-நபவியின் கட்டட வேலை",
-    },
-    date: "Feb 17, 2025",
-  },
-  {
-    image: MessengerWear,
-    title: {
-      en: "What Did the Messenger Wear?",
-      ta: "நபி(ஸல்) அவர்கள் என்ன அணிந்தார்கள்?",
-    },
-    date: "Feb 17, 2025",
-  },
-  {
-  image: SurahRecite,
-    title: {
-      en: "Which Surahs Did the Prophet Recite?",
-      ta: "நபி(ஸல்) அவர்கள் எந்த சூராக்களை ஓதினார்கள்?",
-    },
-    date: "Feb 17, 2025",
-  },
-  {
-    image: MasjidNabawi,
-    title: {
-      en: "The Construction of Masjid an-Nabawi",
-      ta: "மஸ்ஜித் அல்-நபவியின் கட்டட வேலை",
-    },
-    date: "Feb 17, 2025",
-  },
-  {
-    image: MessengerWear,
-    title: {
-      en: "What Did the Messenger Wear?",
-      ta: "நபி(ஸல்) அவர்கள் என்ன அணிந்தார்கள்?",
-    },
-    date: "Feb 17, 2025",
-  },
-];
 // Footer Component
 const Footer = () => (
   <footer id="footer" className="footer mt-4">
@@ -576,119 +646,7 @@ const Footer = () => (
     </div>
   </footer>
 );
-
 export default Home;
 
 
-// // Import images correctly
-// // import ShirkENG from "../assets/images/What_is_Shirk_ENG.jpg";
-// // import ItiqadofSufyanbinUyaynah from "../assets/images/I’tiqad_of_Sufyan_bin_‘Uyaynah_-_ENG.jpg";
-// // import DefendSunnah from "../assets/images/Defend_Sunnah_And_The__Callers_Of_Sunnah_2_ENG.jpg";
 
-
-//  {/* Video and Image Carousel Section */}
-//         {/* <section className="container section-image pt-5">
-//           <div className="row"> */}
-//             {/* Video Carousel */}
-//             {/* <div className="col-lg-7">
-//               <div id="videoCarousel" className="carousel slide" data-bs-ride="carousel">
-//                 <div className="carousel-inner">
-//                   <div className="carousel-item active">
-//                     <iframe
-//                       src="https://www.youtube.com/embed/MWASciGGwEk?si=zWs7dH-jMrKHFP88"
-//                       title="YouTube video player"
-//                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-//                       allowFullScreen
-//                     ></iframe>
-//                   </div>
-//                   <div className="carousel-item">
-//                     <iframe
-//                       src="https://www.youtube.com/embed/JMOhYg6imoA?si=VdQmBV0xQ2jLTGIw"
-//                       title="YouTube video player"
-//                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-//                       allowFullScreen
-//                     ></iframe>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div> */}
-
-//             {/* Image Carousel */}
-//             {/* <div className="col-lg-5">
-//               <div id="imageCarousel" className="carousel slide" data-bs-ride="carousel">
-//                 <div className="carousel-inner">
-//                   {carouselImages.map((img, index) => (
-//                     <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
-//                       <img src={img} alt={`Slide ${index + 1}`} onClick={() => openPopup(img)} />
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </section> */}
-
-// src/pages/Home.jsx
-
-// import React, { useEffect, useState } from "react";
-// import { db } from "../config/firebase";
-// import { collection, getDocs } from "firebase/firestore";
-
-// const Home = () => {
-//   const [posts, setPosts] = useState([]);
-//   const [language, setLanguage] = useState("english"); // Toggle this to 'tamil' to switch
-
-//  useEffect(() => {
-//   const fetchPosts = async () => {
-//     try {
-//       const postsRef = collection(db, "apps", language, "posts");
-//       const snapshot = await getDocs(postsRef);
-//       console.log("Docs fetched:", snapshot.docs.length);
-//       snapshot.docs.forEach(doc => console.log("Doc:", doc.id, doc.data()));
-
-//       const postData = snapshot.docs.map(doc => ({
-//         id: doc.id,
-//         ...doc.data(),
-//       }));
-//       setPosts(postData);
-//     } catch (error) {
-//       console.error("Error fetching posts:", error);
-//     }
-//   };
-
-//   fetchPosts();
-// }, [language]);
-
-//   return (
-//     <div className="p-4">
-//       <div className="mb-4">
-//         <button onClick={() => setLanguage("english")} className="mr-2 px-4 py-2 bg-blue-500 text-white rounded">English</button>
-//         <button onClick={() => setLanguage("tamil")} className="px-4 py-2 bg-green-500 text-white rounded">தமிழ்</button>
-//       </div>
-
-//       <h1 className="text-2xl font-bold mb-4">{language.toUpperCase()} Posts</h1>
-
-//       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-//         {posts.map(post => (
-//           <div key={post.id} className="border p-4 rounded shadow">
-//             {post.imageUrl && (
-//               <img
-//                 src={post.imageUrl}
-//                 alt={post.title}
-//                 className="w-full h-48 object-cover mb-3 rounded"
-//               />
-//             )}
-//             <h2 className="text-xl font-semibold">{post.title}</h2>
-//             <p className="text-sm text-gray-600 mb-2">{post.date}</p>
-//             <p>{post.description}</p>
-//             {post.category && (
-//               <p className="mt-2 text-sm text-blue-500">Category: {post.category}</p>
-//             )}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Home;
